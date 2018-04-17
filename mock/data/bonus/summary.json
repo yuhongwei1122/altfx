@@ -1,0 +1,12 @@
+{
+    "error": {
+        "returnCode": 0,
+        "returnMessage": "OK",
+        "returnUserMessage": "OK"
+    },
+    "data": {
+        "total_bonus":"399.8",
+        "total_count":"3",
+        "total_users":"3"
+    }
+}

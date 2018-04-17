@@ -1,0 +1,28 @@
+{
+    "error":{
+        "returnCode":0,
+        "returnUserMessage":"OK",
+        "returnMessage":"OK"
+    },
+    "data":{
+        "result_count":7,
+        "result":[
+            {
+                "agent_account":"beijingoffice",
+                "agent_unique_code":"8181818",
+                "agent_name":"北京办",
+                "agent_phone":"18600827230",
+                "agent_email":"afbeijingoffice@163.com",
+                "total_bonus":"1100.00"
+            },
+            {
+                "agent_account":"mengxuewen",
+                "agent_unique_code":"8181830",
+                "agent_name":"孟学文",
+                "agent_phone":"13911077002",
+                "agent_email":"153100651@qq.com",
+                "total_bonus":"777.90"
+            }
+        ]
+    }
+}

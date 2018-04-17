@@ -1,0 +1,39 @@
+{
+    "error": {
+        "returnCode": 0,
+        "returnUserMessage": "OK",
+        "returnMessage": "OK"
+    },
+    "data": {
+        "result_count": 3,
+        "result": [
+          {
+            "id": "33",
+            "unique_code": "8181833",
+            "account": "lin",
+            "username": "二级代理",
+            "parent_code": "8181834",
+            "has_set_commission":"0",
+            "regist_date": "1505442514"
+          },
+          {
+            "id": "34",
+            "unique_code": "8181834",
+            "account": "yuhongwei",
+            "username": "一级代理",
+            "parent_code": "8888888",
+            "has_set_commission":"1",
+            "regist_date": "1505442514"
+          },
+          {
+            "id": "35",
+            "unique_code": "8181835",
+            "account": "qing",
+            "username": "二级代理",
+            "parent_code": "8181834",
+            "has_set_commission":"0",
+            "regist_date": "1505442514"
+          }
+        ]
+    }
+}

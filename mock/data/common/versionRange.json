@@ -1,0 +1,58 @@
+{
+    "error": {
+        "returnCode": 0,
+        "returnMessage": "OK",
+        "returnUserMessage": "OK"
+    },
+    "data": {
+        "android":[
+            {
+                "title":"未来版本",
+                "value": "",
+                "force_update": "1"
+            },
+            {
+                "title":"2.8.9",
+                "value": "2.8.9",
+                "force_update": "1"
+            },
+            {
+                "title":"2.8.6",
+                "value": "2.8.6",
+                "force_update": "1"
+            },
+            {
+                "title":"2.8.0",
+                "value": "2.8.0",
+                "force_update": "1"
+            }
+        ],
+        "ios":[
+            {
+                "title":"未来版本",
+                "value": "",
+                "force_update": "1"
+            },
+            {
+                "title":"2.8.9",
+                "value": "2.8.9",
+                "force_update": "1"
+            },
+            {
+                "title":"2.8.7",
+                "value": "2.8.7",
+                "force_update": "1"
+            },
+            {
+                "title":"2.8.6",
+                "value": "2.8.6",
+                "force_update": "1"
+            },
+            {
+                "title":"2.8.0",
+                "value": "2.8.0",
+                "force_update": "1"
+            }
+        ]
+    }
+}

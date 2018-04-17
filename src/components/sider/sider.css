@@ -1,0 +1,23 @@
+.jdb-sider .logo {
+  height: 60px;
+  line-height: 60px;
+  background-color: #fff;
+  text-align: center;
+}
+.jdb-sider .logo img {
+  width: 180px;
+  height: auto;
+}
+.jdb-sider .small-logo {
+  height: 60px;
+  line-height: 60px;
+  background-color: #fff;
+  text-align: center;
+}
+.jdb-sider .small-logo img {
+  width: 60px;
+  height: auto;
+}
+.jdb-sider .ant-menu-inline .ant-menu-item {
+  margin-top: 0px;
+}

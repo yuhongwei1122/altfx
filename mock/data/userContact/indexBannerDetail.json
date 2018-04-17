@@ -1,0 +1,37 @@
+{
+    "error":{
+        "returnCode":0,
+        "returnMessage":"OK",
+        "returnUserMessage":"OK"
+    },
+    "data":{
+        "id":"84",
+        "title":"banner2.0优化测试四",
+        "img_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+        "big_img_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+        "middle_img_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+        "small_img_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+        "common_img_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+        "user_type":"173","upload_file":"",
+        "h5_url":"http://baidu.com",
+        "weight":"0",
+        "online_status":"0",
+        "delete_status":"0",
+        "time_create":"2016-11-23 20:08:48",
+        "time_update":"2016-11-23 20:08:48",
+        "time_online":"0000-00-00 00:00:00",
+        "create_user_name":"test",
+        "ext":null,
+        "show_type":"1",
+        "start_time":"1479953447",
+        "end_time":"1480047017",
+        "frequency":"1",
+        "test_mobile":"",
+        "aim_user_amount":"1",
+        "user_type_text":"没填性别的人群",
+        "ios_version":"2.8.1,",
+        "android_version":"",
+        "version_config":{"android":"","ios":{"min":"2.8.1","max":""}}
+
+    }
+}

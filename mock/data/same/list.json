@@ -1,0 +1,33 @@
+{
+    "error":{
+        "returnCode" : 0,
+        "returnUserMessage" : "请输入正确的用户名或密码"
+    },
+    "data" :{
+        "result" :[
+            {
+                "record_id":"1",
+                "account": "lin",
+                "username": "华英雄",
+                "platform_type": "MT4",
+                "leverage": "1",
+                "commission_model": "ECN1",
+                "note": "备注",
+                "status" : "1",
+                "create_time" : "2017-09-09"
+            },
+            {
+                "record_id":"2",
+                "account": "lin2",
+                "username": "英雄",
+                "platform_type": "MT4",
+                "leverage": "2",
+                "commission_model": "ECN2",
+                "note": "备注2",
+                "status" : "2",
+                "create_time" : "2017-09-09"
+            }
+        ],
+        "result_count": "2"
+    }
+}

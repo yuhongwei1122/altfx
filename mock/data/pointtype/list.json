@@ -1,0 +1,48 @@
+{
+    "error":{
+        "returnCode" : 0,
+        "resultMessage": "ok",
+        "returnUserMessage" : "请输入正确的用户名或密码"
+    },
+    "data" :{
+        "result" :[
+            {
+                "record_id": "3",
+                "customer_name": "用户2",
+                "mt4_login":"fsfsdfd",
+                "apply_time": "1970-01-01 08:00:00",
+                "user_email": "wangqimin@altfx.com",
+                "apply_commission_model": "ECN3",
+                "legacy_commission_model": "ECN1",
+                "agent_name": "二级代理",
+                "agent_id": "二级代理",
+                "status": "待审核"
+            },
+            {
+                "record_id": "1",
+                "customer_name": "用户2",
+                "mt4_login":"fsfsdfd",
+                "apply_time": "1970-01-01 08:00:00",
+                "user_email": "wangqimin@altfx.com",
+                "apply_commission_model": "ECN3",
+                "legacy_commission_model": "ECN1",
+                "agent_name": "二级代理",
+                "agent_id": "二级代理",
+                "status": "审核通过"
+            },
+            {
+                "record_id": "2",
+                "customer_name": "用户2",
+                "mt4_login":"fsfsdfd",
+                "apply_time": "1970-01-01 08:00:00",
+                "user_email": "wangqimin@altfx.com",
+                "apply_commission_model": "ECN3",
+                "legacy_commission_model": "ECN1",
+                "agent_name": "二级代理",
+                "agent_id": "二级代理",
+                "status": "审核驳回"
+            }
+        ],
+        "result_count": "2"
+    }
+}

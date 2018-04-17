@@ -1,0 +1,56 @@
+{
+    "error":{
+        "returnCode":0,
+        "returnUserMessage":"OK",
+        "returnMessage":"OK"
+    },
+    "data":{
+        "result_count":8,
+        "result":[
+            {
+                "id":"8",
+                "agent_unique_code":"8181830",
+                "agent_account":"mengxuewen",
+                "bonus_order":"201801273038181894",
+                "bonus":"99.00",
+                "bonus_status":"0",
+                "bonus_time":"1517053594",
+                "operator":"99",
+                "remark":"000"
+            },
+            {
+                "id":"7",
+                "agent_unique_code":"8181818",
+                "agent_account":"beijingoffice",
+                "bonus_order":"201801273818181862",
+                "bonus":"800.00",
+                "bonus_status":"0",
+                "bonus_time":"1517053562",
+                "operator":"77 vv",
+                "remark":"ooo"
+            },
+            {
+                "id":"1",
+                "agent_unique_code":"8181830",
+                "agent_account":"mengxuewen",
+                "bonus_order":"201801273038181894",
+                "bonus":"99.00",
+                "bonus_status":"1",
+                "bonus_time":"1517053594",
+                "operator":"99",
+                "remark":"000"
+            },
+            {
+                "id":"2",
+                "agent_unique_code":"8181818",
+                "agent_account":"beijingoffice",
+                "bonus_order":"201801273818181862",
+                "bonus":"800.00",
+                "bonus_status":"2",
+                "bonus_time":"1517053562",
+                "operator":"77 vv",
+                "remark":"ooo"
+            }
+        ]
+    }
+}

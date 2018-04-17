@@ -1,0 +1,80 @@
+{
+    "error": {
+        "returnCode": 0,
+        "returnMessage": "OK",
+        "returnUserMessage": "OK"
+    },
+    "data": {  
+        "list":[   
+            {
+                "id": "1",
+                "title": "拉好友，抢现金拉好友，抢现金拉好友，抢现金拉好友，抢现金拉好友，抢现金拉好友，抢现金拉好友，抢现金",
+                "img_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+                "big_img_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+                "middle_img_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+                "small_img_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+                "common_img_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+                "h5_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+                "online_status": "0",
+                "online_status_text": "已下线",
+                "user_type": "2",
+                "user_type_text": "男性用户",
+                "time_create": "2016-05-01",
+                "time_online": "2016-05-01",
+                "weight": "1",
+                "show_type": "0",
+                "start_time": 0,
+                "end_time": 0,
+                "frequency": 0,
+                "user_type_desc": "男性用户"
+            },
+            {
+                "id": "2",
+                "title": "拉好友，抢现金",
+                "img_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+                "big_img_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+                "middle_img_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+                "small_img_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+                "common_img_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+                "h5_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+                "online_status": "1",
+                "online_status_text": "上线中",
+                "user_type": "1",
+                "user_type_text": "全部",
+                "time_create": "2016-05-01",
+                "time_online": "00-00-00 00:00:00",
+                "weight": "10",
+                "show_type": "1",
+                "start_time": "2016-10-19 10:10",
+                "end_time": "2016-10-20-10:10",
+                "frequency": 10,
+                "user_type_desc": "所有用户"
+            },
+            {
+                "id": "4",
+                "title": "拉好友，抢现金",
+                "img_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+                "big_img_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+                "middle_img_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+                "small_img_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+                "common_img_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+                "h5_url": "https://zos.alipayobjects.com/rmsportal/DgGuKTJUjLNOsvluZEbY.png",
+                "online_status": "2",
+                "online_status_text": "上线中",
+                "user_type": "1",
+                "user_type_text": "全部",
+                "time_create": "2016-05-01",
+                "weight": "3",
+                "show_type": "1",
+                "start_time": "2016-10-19 10:10",
+                "end_time": "2016-10-20-10:10",
+                "frequency": 10,
+                "user_type_desc": "所有用户"
+            }
+        ],
+        "pagination": {
+            "amount": 10,
+            "page": 2
+        }
+    }
+}

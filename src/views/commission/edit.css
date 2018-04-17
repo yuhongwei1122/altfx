@@ -1,0 +1,7 @@
+.commission_edit {
+  margin-bottom: 15px;
+}
+.commission_edit :global .ant-card-body {
+  padding: 10px 24px;
+  background: #e5f1f7;
+}

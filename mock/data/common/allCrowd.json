@@ -1,0 +1,44 @@
+{
+    "error": 
+    {
+      "returnCode": 0,
+      "returnMessage": "OK",
+      "returnUserMessage": "OK"
+    },
+    "data": 
+    {  
+      "list": 
+      [   
+        {
+          "id": "104",
+          "rule_name": "高级用户",
+          "rule_desc": "高级用户描述",
+          "tags_number": "2",
+          "query": "(firstname_s:TRUE OR GAP:TRUE)",
+          "scalar": "1000000000",
+          "creater": "lily",
+          "available": "0",
+          "time_created": "2015-08-20",
+          "time_updated": "1970-01-15",
+          "tags": "姓氏 高人群用户"
+        },
+        {
+          "id": "230",
+          "rule_name": "高级用户1",
+          "rule_desc": "高级用户描述",
+          "tags_number": "2",
+          "query": "firstname_s:TRUE AND GAP:TRUE",
+          "scalar": "1000000000",
+          "creater": "jason",
+          "available": "0",
+          "time_created": "2015-08-20",
+          "time_updated": "1970-01-15",
+          "tags": "姓氏 高人群用户 投资用户"
+        }    ],
+      "pagination": 
+      {
+        "amount": 2,
+        "page": 2
+      }
+    }
+  }

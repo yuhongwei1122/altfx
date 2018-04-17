@@ -1,0 +1,11 @@
+{
+    "error":{
+        "returnCode":0,
+        "returnMessage":"ok",
+        "returnUserMessage":"ok"
+    },
+    "data":{
+        "name":"test",
+        "token":"jdb834"
+    }
+}

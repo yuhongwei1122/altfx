@@ -1,0 +1,29 @@
+.main {
+  width: 100%;
+  background: #f0f2f5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+.main .altfx-login {
+  width: 368px;
+  padding: 10px;
+  margin: 10% auto;
+  align-items: center;
+}
+.main :global .ant-tabs .ant-tabs-bar {
+  border-bottom: 0;
+  margin-bottom: 24px;
+  text-align: center;
+}
+.main :global .ant-input-affix-wrapper {
+  font-size: 16px;
+}
+@media (min-width: 768px) {
+  .main {
+    background-image: url(login.svg);
+    background-repeat: no-repeat;
+    background-position: center 110px;
+    background-size: 100%;
+  }
+}

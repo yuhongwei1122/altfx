@@ -1,0 +1,10 @@
+{
+    "error": {
+        "returnCode": 0,
+        "returnMessage": "OK",
+        "returnUserMessage": "OK"
+    },
+    "data": {
+        "image_url":"https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+    }
+}

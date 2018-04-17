@@ -1,0 +1,57 @@
+{
+    "error": {
+        "returnCode": 0,
+        "returnMessage": "OK",
+        "returnUserMessage": "OK"
+    },
+    "data": {
+        "list": [
+            {
+                "id": "1",
+                "perm_name":"超级管理员",
+                "user_amount": "10",
+                "note":"权限管理",
+                "time_create": "1463465978"
+            },
+            {
+                "id": "2",
+                "perm_name":"管理员",
+                "user_amount": "10",
+                "note":"风控管理",
+                "time_create": "1463465978"
+            },
+            {
+                "id": "3",
+                "perm_name":"财务",
+                "user_amount": "1",
+                "note":"财务管理",
+                "time_create": "1463465978"
+            },
+            {
+                "id": "4",
+                "perm_name":"用户管理",
+                "user_amount": "10",
+                "note":"用户管理",
+                "time_create": "1463465978"
+            },
+            {
+                "id": "5",
+                "perm_name":"风控管理",
+                "user_amount": "10",
+                "note":"风控管理",
+                "time_create": "1463465978"
+            },
+            {
+                "id": "6",
+                "perm_name":"客服",
+                "user_amount": "1",
+                "note":"客服管理",
+                "time_create": "1463465978"
+            }
+        ],
+        "pagination": {
+            "amount": 21,
+            "page": 1
+        }
+    }
+}

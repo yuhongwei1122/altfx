@@ -1,0 +1,27 @@
+{
+    "error":{
+        "returnCode" : 0,
+        "returnUserMessage" : "请输入正确的用户名或密码"
+    },
+    "data" :{
+        "result" :[
+            {
+                "id": "5",
+                "rate_type": "1",
+                "rate": "9",
+                "creator": "9",
+                "account": "yuhongwei3",
+                "create_time": "1505442514"
+            },
+            {
+                "id": "6",
+                "rate_type": "2",
+                "rate": "9",
+                "creator": "9",
+                "account": "yuhongwei3",
+                "create_time": "1505442514"
+            }
+        ],
+        "result_count": "2"
+    }
+}
