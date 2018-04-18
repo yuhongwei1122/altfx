@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Button, Table, Input, Row, Col, Card, Form, Spin, Divider, Icon } from 'antd';
+import { Button, Table, Input, Row, Col, Card, Form, Spin, Divider, Icon , message} from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import './edit.css';
@@ -35,7 +35,11 @@ class editForm extends PureComponent {
             this.setState({loading: true});
             axios.post('/api/validate/change-agent-commission',qs.stringify(values)
             ).then((res) => {
-                this.props.history.push("/commission/list");
+                if(Number(res.error.returnCode) === 0){
+                    this.props.history.push("/commission/list");
+                }else{
+                    message.error(res.error.returnUserMessage);
+                }
             });
           }
         });
@@ -50,16 +54,20 @@ class editForm extends PureComponent {
             unique_code: this.props.match.params.unique_code
         })).then((res) => {
             this.setState({loading: false});
-            // console.log(res);
-            const temp =[...this.state.data];
-            res.data.result.map((item,index)=>{
-                temp[0][item.commission_model] = item.commission;
-                temp[1][item.commission_model.replace("-XAUUSD","")] = item.commission;
-            });
-            // console.log(temp);
-            this.setState({
-                data: temp
-            });
+            if(Number(res.error.returnCode) === 0){
+                // console.log(res);
+                const temp =[...this.state.data];
+                res.data.result.map((item,index)=>{
+                    temp[0][item.commission_model] = item.commission;
+                    temp[1][item.commission_model.replace("-XAUUSD","")] = item.commission;
+                });
+                // console.log(temp);
+                this.setState({
+                    data: temp
+                });
+            }else{
+                message.error(res.error.returnUserMessage);
+            }
         });
     };
     onChange = (value,key,index) =>{

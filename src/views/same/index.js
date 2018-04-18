@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button, Tag, notification, Select } from 'antd';
+import { Table, Button, Tag, notification, Select, message } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import DateFormate from '../../components/tool/DateFormatPan';
@@ -33,15 +33,19 @@ class SameAccountTable extends Component {
             size: this.state.pagination.pageSize,  //每页数据条数
             ...params
         })).then((res) => {
-            let pager = { ...this.state.pagination };
-            pager.total = Number(res.data.result_count);
-            this.setState({
-                pagination: {
-                    total : Number(res.data.result_count),
-                    ...pager
-                },
-                tableData : res.data.result
-            });
+            if(Number(res.error.returnCode) === 0){
+                let pager = { ...this.state.pagination };
+                pager.total = Number(res.data.result_count);
+                this.setState({
+                    pagination: {
+                        total : Number(res.data.result_count),
+                        ...pager
+                    },
+                    tableData : res.data.result
+                });
+            }else{
+                message.error(res.error.returnUserMessage);
+            }
         });
     };
     handleChange = (pagination, filters, sorter) => {
@@ -72,15 +76,19 @@ class SameAccountTable extends Component {
                 result: 2,//拒绝的状态
                 ...params
             })).then((res) => {
-                notification['error']({
-                    message: '审核拒绝',
-                    description: '审核拒绝及拒绝原因邮件已发送至该用户邮箱～',
-                    duration: 2.5
-                });
-                this.setState({
-                    rejectId:"",
-                    rejectVisable: false
-                });
+                if(Number(res.error.returnCode) === 0){
+                    notification['error']({
+                        message: '审核拒绝',
+                        description: '审核拒绝及拒绝原因邮件已发送至该用户邮箱～',
+                        duration: 2.5
+                    });
+                    this.setState({
+                        rejectId:"",
+                        rejectVisable: false
+                    });
+                }else{
+                    message.error("审核失败：" + res.error.returnUserMessage);
+                }
             });
         }else{
             this.setState({
@@ -102,10 +110,19 @@ class SameAccountTable extends Component {
                 user_id: this.state.rejectId,
                 ...params
             })).then((res) => {
-                this.setState({
-                    rejectId:"",
-                    successVisable: false
-                });
+                if(Number(res.error.returnCode) === 0){
+                    notification['success']({
+                        message: '审核成功',
+                        description: '审核通过邮件已发送至该用户邮箱～',
+                        duration: 2.5
+                    });
+                    this.setState({
+                        rejectId:"",
+                        successVisable: false
+                    });
+                }else{
+                    message.error("审核失败：" + res.error.returnUserMessage);
+                }
             });
         }else{
             this.setState({

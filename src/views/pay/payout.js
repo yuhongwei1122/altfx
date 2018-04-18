@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button, notification } from 'antd';
+import { Table, Button, notification,message } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import DateFormate from '../../components/tool/DateFormatPan';
@@ -43,17 +43,21 @@ class PayoutTable extends Component {
             cash_type:2,
             ...params
         })).then((res) => {
-            let pager = { ...this.state.pagination };
-            pager.total = Number(res.data.result_count);
-            this.setState({
-                pagination: {
-                    total : Number(res.data.result_count),
-                    ...pager
-                },
-                tableData : res.data.result,
-                total_volume:res.data.total_volume,
-                total_commission:res.data.total_commission
-            });
+            if(Number(res.error.returnCode) === 0){
+                let pager = { ...this.state.pagination };
+                pager.total = Number(res.data.result_count);
+                this.setState({
+                    pagination: {
+                        total : Number(res.data.result_count),
+                        ...pager
+                    },
+                    tableData : res.data.result,
+                    total_volume:res.data.total_volume,
+                    total_commission:res.data.total_commission
+                });
+            }else{
+                message.error(res.error.returnUserMessage);
+            }
         });
     };
     handleChange = (pagination, filters, sorter) => {
@@ -74,7 +78,9 @@ class PayoutTable extends Component {
             bank_no: row.bank_no
         })).then((res) => {
             // return res.data.image_url || "";
-            row.bank_img = res.data.image_url || "";
+            if(Number(res.error.returnCode) === 0){
+                row.bank_img = res.data.image_url || "";
+            }
             this.setState({
                 cash_order: row.cash_order,
                 rejectVisable: true,
@@ -90,21 +96,25 @@ class PayoutTable extends Component {
                 result: 2,//拒绝的状态
                 ...params
             })).then((res) => {
-                Notification['error']({
-                    message: '拒绝',
-                    description: '该笔出金拒绝及原因已发送至该用户邮箱～',
-                    duration: 2.5
-                });
-                this.setState({
-                    rejectVisable: false,
-                    data:{
-                        apply_amount: "",
-                        converted_amount: "",
-                        before_balance: "",
-                        after_balance: ""
-                    }
-                });
-                this.fetchData({page:1});
+                if(Number(res.error.returnCode) === 0){
+                    Notification['error']({
+                        message: '拒绝',
+                        description: '该笔出金拒绝及原因已发送至该用户邮箱～',
+                        duration: 2.5
+                    });
+                    this.setState({
+                        rejectVisable: false,
+                        data:{
+                            apply_amount: "",
+                            converted_amount: "",
+                            before_balance: "",
+                            after_balance: ""
+                        }
+                    });
+                    this.fetchData({page:1});
+                }else{
+                    message.error(res.error.returnUserMessage);
+                }
             });
         }else{
             this.setState({
@@ -125,7 +135,9 @@ class PayoutTable extends Component {
             bank_no: row.bank_no
         })).then((res) => {
             // return res.data.image_url || "";
-            row.bank_img = res.data.image_url || "";
+            if(Number(res.error.returnCode) === 0){
+                row.bank_img = res.data.image_url || "";
+            }
             this.setState({
                 cash_order: row.cash_order,
                 firstVisable: true,
@@ -141,16 +153,20 @@ class PayoutTable extends Component {
                 result: 2,//拒绝的状态
                 ...params
             })).then((res) => {
-                Notification['success']({
-                    message: '初审完成',
-                    description: '请通知相关人员该笔出金初审已完成，请复审～',
-                    duration: 2.5
-                });
-                this.setState({
-                    firstVisable: false,
-                    data:{}
-                });
-                this.fetchData({page:1});
+                if(Number(res.error.returnCode) === 0){
+                    Notification['success']({
+                        message: '初审完成',
+                        description: '请通知相关人员该笔出金初审已完成，请复审～',
+                        duration: 2.5
+                    });
+                    this.setState({
+                        firstVisable: false,
+                        data:{}
+                    });
+                    this.fetchData({page:1});
+                }else{
+                    message.error(res.error.returnUserMessage);
+                }
             });
         }else{
             this.setState({
@@ -166,7 +182,9 @@ class PayoutTable extends Component {
             bank_no: row.bank_no
         })).then((res) => {
             // return res.data.image_url || "";
-            row.bank_img = res.data.image_url || "";
+            if(Number(res.error.returnCode) === 0){
+                row.bank_img = res.data.image_url || "";
+            }
             this.setState({
                 cash_order: row.cash_order,
                 secondVisable: true,
@@ -182,16 +200,20 @@ class PayoutTable extends Component {
                 result: 2,//拒绝的状态
                 ...params
             })).then((res) => {
-                notification['success']({
-                    message: '入金完成',
-                    description: '出金成功通知邮件已发送至该用户邮箱～',
-                    duration: 2.5
-                });
-                this.setState({
-                    secondVisable: false,
-                    data:{}
-                });
-                this.fetchData({page:1});
+                if(Number(res.error.returnCode) === 0){
+                    notification['success']({
+                        message: '入金完成',
+                        description: '出金成功通知邮件已发送至该用户邮箱～',
+                        duration: 2.5
+                    });
+                    this.setState({
+                        secondVisable: false,
+                        data:{}
+                    });
+                    this.fetchData({page:1});
+                }else{
+                    message.error(res.error.returnUserMessage);
+                }
             });
         }else{
             this.setState({
@@ -207,7 +229,9 @@ class PayoutTable extends Component {
             bank_no: row.bank_no
         })).then((res) => {
             // return res.data.image_url || "";
-            row.bank_img = res.data.image_url || "";
+            if(Number(res.error.returnCode) === 0){
+                row.bank_img = res.data.image_url || "";
+            }
             this.setState({
                 cash_order: row.cash_order,
                 bankVisable: true,

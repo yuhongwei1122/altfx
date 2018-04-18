@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { InputNumber, Input, Form, Spin, Modal } from 'antd';
+import { InputNumber, Input, Form, Spin, Modal,message } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 const FormItem = Form.Item;
@@ -20,8 +20,12 @@ class addForm extends PureComponent {
             this.setState({loading: true});
             axios.post('/api/bonus/create',qs.stringify(values
             )).then((res) => {
-                this.setState({loading: false});
-                this.props.handleEditOk();
+                if(Number(res.error.returnCode) === 0){
+                    this.setState({loading: false});
+                    this.props.handleEditOk();
+                }else{
+                    message.error(res.error.returnUserMessage);
+                }
             });
           }
         });

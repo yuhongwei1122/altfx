@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Table, Button, Modal, Tag, notification } from 'antd';
+import { Table, Button, Modal, Tag, notification, message } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import DeleteModel from '../../components/tool/deleteCommonModel';
@@ -31,15 +31,19 @@ class RegisterTable extends Component {
             size: this.state.pagination.pageSize,  //每页数据条数
             ...params
         })).then((res) => {
-            let pager = { ...this.state.pagination };
-            pager.total = Number(res.data.result_count);
-            this.setState({
-                pagination: {
-                    total : Number(res.data.result_count),
-                    ...pager
-                },
-                tableData : res.data.result
-            });
+            if(Number(res.error.returnCode) === 0){
+                let pager = { ...this.state.pagination };
+                pager.total = Number(res.data.result_count);
+                this.setState({
+                    pagination: {
+                        total : Number(res.data.result_count),
+                        ...pager
+                    },
+                    tableData : res.data.result
+                });
+            }else{
+                message.error(res.error.returnUserMessage);
+            }
         });
     };
     handleSearch = (params) => {

@@ -42,17 +42,21 @@ class PayinTable extends Component {
             cash_type:1,
             ...params
         })).then((res) => {
-            let pager = { ...this.state.pagination };
-            pager.total = Number(res.data.result_count);
-            this.setState({
-                pagination: {
-                    total : Number(res.data.result_count),
-                    ...pager
-                },
-                tableData : res.data.result,
-                total_volume:res.data.total_volume,
-                total_commission:res.data.total_commission
-            });
+            if(Number(res.error.returnCode) === 0){
+                let pager = { ...this.state.pagination };
+                pager.total = Number(res.data.result_count);
+                this.setState({
+                    pagination: {
+                        total : Number(res.data.result_count),
+                        ...pager
+                    },
+                    tableData : res.data.result,
+                    total_volume:res.data.total_volume,
+                    total_commission:res.data.total_commission
+                });
+            }else{
+                message.error(res.error.returnUserMessage);
+            }
         });
     };
     handleChange = (pagination, filters, sorter) => {
@@ -86,21 +90,25 @@ class PayinTable extends Component {
                 result: 2,//拒绝的状态
                 ...params
             })).then((res) => {
-                notification['error']({
-                    message: '拒绝',
-                    description: '该笔入金拒绝及原因已发送至该用户邮箱～',
-                    duration: 2.5
-                });
-                this.setState({
-                    rejectVisable: false,
-                    data:{
-                        apply_amount: "",
-                        converted_amount: "",
-                        before_balance: "",
-                        after_balance: ""
-                    }
-                });
-                this.fetchData({page:1});
+                if(Number(res.error.returnCode) === 0){
+                    Notification['error']({
+                        message: '拒绝',
+                        description: '该笔入金拒绝及原因已发送至该用户邮箱～',
+                        duration: 2.5
+                    });
+                    this.setState({
+                        rejectVisable: false,
+                        data:{
+                            apply_amount: "",
+                            converted_amount: "",
+                            before_balance: "",
+                            after_balance: ""
+                        }
+                    });
+                    this.fetchData({page:1});
+                }else{
+                    message.error(res.error.returnUserMessage);
+                }
             });
         }else{
             this.setState({
@@ -134,21 +142,25 @@ class PayinTable extends Component {
                 result: 2,//拒绝的状态
                 ...params
             })).then((res) => {
-                notification['success']({
-                    message: '初审完成',
-                    description: '请通知相关人员该笔入金初审已完成，请复审～',
-                    duration: 2.5
-                });
-                this.setState({
-                    firstVisable: false,
-                    data:{
-                        apply_amount: "",
-                        converted_amount: "",
-                        before_balance: "",
-                        after_balance: ""
-                    }
-                });
-                this.fetchData({page:1});
+                if(Number(res.error.returnCode) === 0){
+                    Notification['success']({
+                        message: '初审完成',
+                        description: '请通知相关人员该笔入金初审已完成，请复审～',
+                        duration: 2.5
+                    });
+                    this.setState({
+                        firstVisable: false,
+                        data:{
+                            apply_amount: "",
+                            converted_amount: "",
+                            before_balance: "",
+                            after_balance: ""
+                        }
+                    });
+                    this.fetchData({page:1});
+                }else{
+                    message.error(res.error.returnUserMessage);
+                }
             });
         }else{
             this.setState({
@@ -183,7 +195,7 @@ class PayinTable extends Component {
                 ...params
             })).then((res) => {
                 if(Number(res.error.returnCode) === 0){
-                    notification['success']({
+                    Notification['success']({
                         message: '入金完成',
                         description: '入金成功通知邮件已发送至该用户邮箱～',
                         duration: 2.5

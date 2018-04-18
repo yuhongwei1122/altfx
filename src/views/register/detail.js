@@ -87,9 +87,13 @@ export default class Detail extends Component{
                 result: 2,//拒绝的状态
                 ...params
             })).then((res) => {
-                this.setState({
-                    rejectVisable: false
-                });
+                if(Number(res.error.returnCode) === 0){
+                    this.setState({
+                        rejectVisable: false
+                    });
+                }else{
+                    message.error("拒绝失败");
+                }
             });
         }else{
             this.setState({
@@ -108,9 +112,13 @@ export default class Detail extends Component{
                 user_id: this.state.detail.id,
                 ...params
             })).then((res) => {
-                this.setState({
-                    successVisable: false
-                });
+                if(Number(res.error.returnCode) === 0){
+                    this.setState({
+                        successVisable: false
+                    });
+                }else{
+                    message.error("审核失败");
+                }
             });
         }else{
             this.setState({
