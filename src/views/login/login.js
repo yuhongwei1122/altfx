@@ -42,6 +42,8 @@ class LoginForm extends Component {
                     //         message.error(resr.error.returnUserMessage);
                     //     }
                     // });
+                    values.token = res.data.token;
+                    values.user_id = res.data.user_id;
                     sessionStorage.setItem("altfx_user",JSON.stringify(values));
                     this.props.history.push("/overview");
                 }else{
