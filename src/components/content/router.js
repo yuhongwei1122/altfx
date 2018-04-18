@@ -30,7 +30,7 @@ export default [
         component: () => import('../../views/register/index')
     },
     {
-        path: '/register/detail',
+        path: '/register/detail/:user_id',
         name: '注册审核详情',
         private: true,
         component: () => import('../../views/register/detail')

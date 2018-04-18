@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tabs, Row, Col, List, Card, Divider, Icon, Button } from 'antd';
+import { Tabs, Row, Col, List, Card, Divider, Icon, Button, message } from 'antd';
 import axios from 'axios';
 import RejectModal from './reject';
 import SuccessModal from './success';
@@ -12,7 +12,11 @@ export default class Detail extends Component{
         this.state = {
             detail: {},
             rejectVisable: false,
-            successVisable: false
+            successVisable: false,
+            user_id: "",
+            identity_front_image: "",
+            identity_back_image: "",
+            risk_tips_image: ""
         };
     };
     getRowItems = (colums,detail) => {
@@ -113,13 +117,73 @@ export default class Detail extends Component{
             });
         }
     };
+    fetchFrontCard = () => {
+        axios.post('/api/image/get-url',{
+            account: this.state.detail.account || "",
+            type:1
+        }).then((res) => {
+            if(Number(res.error.returnCode) === 0){
+                this.setState({
+                    identity_front_image: res.data.image_url
+                });
+            }else{
+                message.error(res.error.retrunUserMessage);
+            }
+        });
+    };
+    fetchBackCard = () => {
+        axios.post('/api/image/get-url',{
+            account: this.state.detail.account || "",
+            type:2
+        }).then((res) => {
+            if(Number(res.error.returnCode) === 0){
+                this.setState({
+                    identity_back_image: res.data.image_url
+                });
+            }else{
+                message.error(res.error.retrunUserMessage);
+            }
+        });
+    };
+    fetchRiskCard = () => {
+        axios.post('/api/image/get-url',{
+            account: this.state.detail.account || "",
+            type:3
+        }).then((res) => {
+            if(Number(res.error.returnCode) === 0){
+                this.setState({
+                    risk_tips_image: res.data.image_url
+                });
+            }else{
+                message.error(res.error.retrunUserMessage);
+            }
+        });
+    };
+    fetachImage = () => {
+        axios.all([this.fetchFrontCard(), this.fetchBackCard(),this.fetchRiskCard()])
+        .then(axios.spread(function (acct, perms) {
+            // Both requests are now complete
+            console.log(perms);
+            console.log(acct);
+        }));
+    };
     componentDidMount(){
         axios.post('/api/register/user-detail',{
-            user_id: "2"
+            user_id: this.props.match.params.user_id || ""
         }).then((res) => {
-            this.setState({
-                detail: res.data
-            });
+            if(Number(res.error.returnCode) === 0){
+                this.setState({
+                    detail: res.data,
+                    user_id: this.props.match.params.user_id || ""
+                });
+                this.fetachImage();
+            }else{
+                message.error(res.error.retrunUserMessage);
+                this.setState({
+                    detail: {},
+                    user_id: this.props.match.params.user_id || ""
+                });
+            }
         });
     };
     render(){
@@ -192,17 +256,22 @@ export default class Detail extends Component{
                         </List> 
                     </TabPane>
                     <TabPane tab="资料信息" key="2">
-                        <Row gutter={16} key="4">
-                            <Col span={8}>
+                        <Row gutter={24} key="4">
+                            <Col span={6}>
                                 <Card title="身份证号">{detail.identity}</Card>
                             </Col>
-                            <Col span={8}>
+                            <Col span={6}>
                                 <Card title="身份证正面照片">
                                     <img alt="" src={detail.identity_front_image}/>
                                 </Card>
                             </Col>
-                            <Col span={8}>
+                            <Col span={6}>
                                 <Card title="身份证反面照片">
+                                    <img alt="" src={detail.identity_front_image}/>
+                                </Card>
+                            </Col>
+                            <Col span={6}>
+                                <Card title="手持身份证照片">
                                     <img alt="" src={detail.identity_front_image}/>
                                 </Card>
                             </Col>

@@ -185,8 +185,8 @@ class RegisterTable extends Component {
                 fixed:"right",
                 render: (text, row, index) => (
                     <ButtonGroup> 
-                        <Button style={{lineHeight:0}} disabled={row.status != 2} title="审核" type="primary" size="small" icon="edit"></Button>
-                        <Link to="/register/detail"><Button style={{lineHeight:0}} title="详情" type="primary" size="small" icon="eye"></Button></Link>
+                        <Link to={{pathname:"/register/detail/"+row.id}}><Button style={{lineHeight:0}} disabled={row.status != 2} title="审核" type="primary" size="small" icon="edit"></Button></Link>
+                        <Link to={{pathname:"/register/detail/"+row.id}}><Button style={{lineHeight:0}} title="详情" type="primary" size="small" icon="eye"></Button></Link>
                         <Button style={{lineHeight:0}} disabled={row.status != 1} onClick={this.handleSendMail.bind(this,row.id)} title="重新发送验证邮件" type="primary" size="small" icon="reload"></Button>
                     </ButtonGroup>
                 )
