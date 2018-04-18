@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button, Modal, Tag, Card, Row, Col } from 'antd';
+import { Table, Button, Tag, Card, Row, Col } from 'antd';
 import axios from 'axios';
 import DateFormate from '../../components/tool/DateFormatPan';
 import EditForm from './edit';

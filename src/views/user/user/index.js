@@ -32,7 +32,7 @@ class UserTable extends Component {
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
         console.log(params);
-        axios.get('/platform/user/list',{
+        axios.get('/api/user/list',{
             params: {
 				limit: this.state.pagination.pageSize,  //每页数据条数
                 ...params
@@ -71,7 +71,7 @@ class UserTable extends Component {
         this.setState({
             confirmLoading: true
         });
-        axios.post('/platform/user/delete',{
+        axios.post('/api/user/delete',{
             id: this.state.delId
         }).then((res) => {
             this.setState({

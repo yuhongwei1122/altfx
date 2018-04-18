@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Form, Row, Col, Input, Button, Icon, Modal } from 'antd';
+import { Form, Icon, Modal } from 'antd';
 const FormItem = Form.Item;
-const { TextArea } = Input;
 
 class InSecondCheckForm extends Component{
     constructor(props){
@@ -24,7 +23,7 @@ class InSecondCheckForm extends Component{
     }
     
     render(){
-        const { getFieldDecorator } = this.props.form;
+        // const { getFieldDecorator } = this.props.form;
         const formItemLayout = {
             labelCol: {
               xs: { span: 24 },

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Row, Col, Button, Icon, Modal, Card, Divider } from 'antd';
+import { Form, Button, Icon, Modal, Card, Divider } from 'antd';
 const FormItem = Form.Item;
 
 class OutBankInfoForm extends Component{

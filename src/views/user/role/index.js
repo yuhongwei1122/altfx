@@ -30,7 +30,7 @@ class RoleTable extends Component {
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
         console.log(params);
-        axios.get('/platform/user/role',{
+        axios.get('/api/user/role',{
             params: {
 				limit: this.state.pagination.pageSize,  //每页数据条数
                 ...params
@@ -69,7 +69,7 @@ class RoleTable extends Component {
         this.setState({
             confirmLoading: true
         });
-        axios.post('/platform/user/role/delete',{
+        axios.post('/api/user/role/delete',{
             id: this.state.delId
         }).then((res) => {
             this.setState({

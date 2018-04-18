@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button, Modal, Tag, Card, Row, Col, notification } from 'antd';
+import { Table, Button, notification } from 'antd';
 import axios from 'axios';
 import DateFormate from '../../components/tool/DateFormatPan';
 import SearchForm from './insearch';
@@ -326,9 +326,9 @@ class PayinTable extends Component {
                 fixed:"right",
                 render: (text,row,index) => {
                     return (<ButtonGroup> 
-                        <Button style={{lineHeight:0}} disabled={Number(row.status) != 2} onClick={this.handleFirst.bind(this,row.cash_order,row.apply_amount,row.converted_amount,row.before_balance,row.after_balance)} title="初审" type="primary" size="small" icon="check"></Button>
-                        <Button style={{lineHeight:0}} disabled={Number(row.status) != 3} onClick={this.handleSecond.bind(this,row.cash_order,row.apply_amount,row.converted_amount,row.before_balance,row.after_balance)} title="复审" type="primary" size="small" icon="check"></Button>
-                        <Button style={{lineHeight:0}} disabled={Number(row.status) != 1 && Number(row.status) != 5 && Number(row.status) != 6 && Number(row.status) != 7 && Number(row.status) != 8} onClick={this.handleReject.bind(this,row.cash_order,row.apply_amount,row.converted_amount,row.before_balance,row.after_balance)} title="拒绝" type="primary" size="small" icon="close"></Button>
+                        <Button style={{lineHeight:0}} disabled={Number(row.status) !== 2} onClick={this.handleFirst.bind(this,row.cash_order,row.apply_amount,row.converted_amount,row.before_balance,row.after_balance)} title="初审" type="primary" size="small" icon="check"></Button>
+                        <Button style={{lineHeight:0}} disabled={Number(row.status) !== 3} onClick={this.handleSecond.bind(this,row.cash_order,row.apply_amount,row.converted_amount,row.before_balance,row.after_balance)} title="复审" type="primary" size="small" icon="check"></Button>
+                        <Button style={{lineHeight:0}} disabled={Number(row.status) !== 1 && Number(row.status) !== 5 && Number(row.status) !== 6 && Number(row.status) !== 7 && Number(row.status) !== 8} onClick={this.handleReject.bind(this,row.cash_order,row.apply_amount,row.converted_amount,row.before_balance,row.after_balance)} title="拒绝" type="primary" size="small" icon="close"></Button>
                     </ButtonGroup>);
                 }
             } 

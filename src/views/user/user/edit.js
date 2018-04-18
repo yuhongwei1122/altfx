@@ -5,7 +5,7 @@ const FormItem = Form.Item;
 const { TextArea } = Input;
 const RadioGroup = Radio.Group;
 
-class editForm extends React.PureComponent {
+class editForm extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,13 +22,13 @@ class editForm extends React.PureComponent {
             this.setState({loading: true});
             if(this.props.editData.id){
                 values.id = this.props.editData.id;
-                axios.post('/platform/user/update',values
+                axios.post('/api/user/update',values
                 ).then((res) => {
                     this.setState({loading: false});
                     this.props.handleEditOk();
                 });
             }else{
-                axios.post('/platform/user/add',values
+                axios.post('/api/user/add',values
                 ).then((res) => {
                     this.setState({loading: false});
                     this.props.handleEditOk();
@@ -38,7 +38,7 @@ class editForm extends React.PureComponent {
         });
     };
     componentDidMount(){
-        axios.get('/platform/user/role',{
+        axios.get('/api/user/role',{
             params:{
                 limit: 20
             }

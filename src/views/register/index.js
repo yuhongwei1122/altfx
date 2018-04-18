@@ -194,9 +194,6 @@ class RegisterTable extends Component {
         ];
         return (
             <div className="overview">
-                <div style={{marginBottom:"10px",overflow:"hidden"}}>
-                    <Button type="primary" style={{float:"right"}} icon="plus">新增</Button>
-                </div>
                 <div style={{marginTop:10}}>
                     <SearchForm handleSearch={this.handleSearch}/>
                     <Table 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Row, Col, Input, Button, Icon, Modal } from 'antd';
+import { Form,Input, Modal } from 'antd';
 const FormItem = Form.Item;
 
 class SuccessForm extends Component{

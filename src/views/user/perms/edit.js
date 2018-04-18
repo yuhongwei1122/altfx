@@ -18,13 +18,13 @@ class editForm extends Component {
             this.setState({loading: true});
             if(this.props.editData.id){
                 values.id = this.props.editData.id;
-                axios.post('/platform/user/perms/update',values
+                axios.post('/api/user/perms/update',values
                 ).then((res) => {
                     this.setState({loading: false});
                     this.props.handleEditOk();
                 });
             }else{
-                axios.post('/platform/user/perms/add',values
+                axios.post('/api/user/perms/add',values
                 ).then((res) => {
                     this.setState({loading: false});
                     this.props.handleEditOk();

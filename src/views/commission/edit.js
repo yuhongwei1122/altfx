@@ -4,31 +4,7 @@ import axios from 'axios';
 import './edit.css';
 const FormItem = Form.Item;
 
-const data = [
-    {
-        id: "1",
-        "name":"外汇返佣金额(USD)",
-        ECN1: 10,
-        ECN2: 32,
-        ECN3: 2,
-        ECN4: 10,
-        ECN5: 32,
-        ECN6: 2
-    },
-    {
-        id: "2",
-        "name":"贵金属返佣金额(USD)",
-        ECN1: 10,
-        ECN2: 32,
-        ECN3: 2,
-        ECN4: 10,
-        ECN5: 32,
-        ECN6: 23
-    }
-];
-
-
-class editForm extends React.PureComponent {
+class editForm extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -115,18 +91,6 @@ class editForm extends React.PureComponent {
               xs: { span: 24 },
               sm: { span: 16 },
             },
-        };
-        const tailFormItemLayout = {
-              wrapperCol: {
-                xs: {
-                  span: 24,
-                  offset: 0,
-                },
-                sm: {
-                  span: 16,
-                  offset: 8,
-                },
-              },
         };
         const columns = [
             {

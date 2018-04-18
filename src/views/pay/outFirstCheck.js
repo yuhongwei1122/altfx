@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Row, Col, Button, Icon, Modal, Card } from 'antd';
+import { Form, Icon, Modal, Card } from 'antd';
 const FormItem = Form.Item;
 
 class OutFirstCheckForm extends Component{
@@ -23,7 +23,7 @@ class OutFirstCheckForm extends Component{
     }
     
     render(){
-        const { getFieldDecorator } = this.props.form;
+        // const { getFieldDecorator } = this.props.form;
         const formItemLayout = {
             labelCol: {
               xs: { span: 24 },

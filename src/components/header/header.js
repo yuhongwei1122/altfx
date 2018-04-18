@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Layout, Menu, Dropdown, Icon, Avatar } from 'antd';
 import "./header.css"
 const { Header } = Layout;
@@ -7,18 +8,27 @@ class JdbHeader extends Component {
     constructor(){
         super();
         this.state = {
-            poName: ""
+            username: ""
         };
     };
     componentDidMount(){
-        console.log(JSON.parse(sessionStorage.getItem("altfx_user")));
+        let info = {};
+        if(sessionStorage.getItem("altfx_user")){
+            info = JSON.parse(sessionStorage.getItem("altfx_user"));
+        }
         this.setState({
-            poName: JSON.parse(sessionStorage.getItem("altfx_user")) ? JSON.parse(sessionStorage.getItem("altfx_user")).userName : "test"
+            username: info.account || "altfx"
         });
     };
     onMenuClick = () => {
         sessionStorage.setItem("altfx_user","");
-        this.props.history.push("/login");
+        axios.post('/api/login/out').then((res) => {
+            if(Number(res.error.returnCode) === 0){
+                window.location.href = "/";
+            }else{
+                window.location.href = "/"
+            }
+        });
     };
     render() {
         const menu = (
@@ -38,7 +48,7 @@ class JdbHeader extends Component {
                     <Dropdown overlay={menu}>
                         <span className="action account">
                         <Avatar size="small" className="avatar" src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
-                        <span className="name">{this.state.poName}</span>
+                        <span className="name">{this.state.username}</span>
                         </span>
                     </Dropdown>  
                 </div>

@@ -27,13 +27,13 @@ class editForm extends Component {
             this.setState({loading: true});
             if(this.props.editData.id){
                 values.id = this.props.editData.id;
-                axios.post('/platform/user/role/update',values
+                axios.post('/api/user/role/update',values
                 ).then((res) => {
                     this.setState({loading: false,checkedList:[]});
                     this.props.handleEditOk();
                 });
             }else{
-                axios.post('/platform/user/role/add',values
+                axios.post('/api/user/role/add',values
                 ).then((res) => {
                     this.setState({loading: false,checkedList:[]});
                     this.props.handleEditOk();
@@ -57,7 +57,7 @@ class editForm extends Component {
         });
     };
     componentDidMount(){
-        axios.get('/platform/user/perms',{
+        axios.get('/api/user/perms',{
             params:{
                 limit: 20
             }

@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react';
-import { Button, InputNumber, Input, Form, Spin, Radio, Modal } from 'antd';
+import { InputNumber, Input, Form, Spin, Modal } from 'antd';
 import axios from 'axios';
 const FormItem = Form.Item;
-const RadioGroup = Radio.Group;
 const { TextArea } = Input;
 
-class addForm extends React.PureComponent {
+class addForm extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -44,18 +43,6 @@ class addForm extends React.PureComponent {
             xs: { span: 24 },
             sm: { span: 16 },
           },
-        };
-        const tailFormItemLayout = {
-            wrapperCol: {
-              xs: {
-                span: 24,
-                offset: 0,
-              },
-              sm: {
-                span: 16,
-                offset: 8,
-              },
-            },
         };
         return (
             <Modal

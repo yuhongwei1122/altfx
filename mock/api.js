@@ -1,12 +1,19 @@
 const express  = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
-app.post('/login/login',(req, res) => {
+app.post('/api/login/login',(req, res) => {
     res.send(require('./data/login.json'));
+});
+app.post('/api/login/out',(req, res) => {
+    res.send(require('./data/common/ok.json'));
 });
 //公共部分
 app.post('/api/image/get-url',(req, res) => {
     res.send(require('./data/common/imgurl.json'));
+});
+//获取登录用户权限
+app.post('/api/user/perms',(req, res) => {
+    res.send(require('./data/common/perms.json'));
 });
 //-----角色管理-----
 app.get('/api/user/role',(req, res) => {

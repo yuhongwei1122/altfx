@@ -187,8 +187,8 @@ class BonusTable extends Component {
                 fixed:"right",
                 render: (text, row, index) => (
                     <ButtonGroup> 
-                        <Button style={{lineHeight:0}} onClick={this.handleConfirm.bind(this,row)} disabled={Number(row.bonus_status) != 0} title="发放" type="primary" size="small" icon="check"></Button>
-                        <Button style={{lineHeight:0}} onClick={this.handleCanel.bind(this,row.bonus_order,row.agent_unique_code)} disabled={Number(row.bonus_status) != 0} title="取消" type="danger" size="small" icon="close"></Button>
+                        <Button style={{lineHeight:0}} onClick={this.handleConfirm.bind(this,row)} disabled={Number(row.bonus_status) !== 0} title="发放" type="primary" size="small" icon="check"></Button>
+                        <Button style={{lineHeight:0}} onClick={this.handleCanel.bind(this,row.bonus_order,row.agent_unique_code)} disabled={Number(row.bonus_status) !== 0} title="取消" type="danger" size="small" icon="close"></Button>
                     </ButtonGroup>
                 )
             }

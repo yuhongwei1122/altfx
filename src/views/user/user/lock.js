@@ -1,11 +1,9 @@
 import React, { PureComponent } from 'react';
-import { Button, Input, Form, Spin, Radio } from 'antd';
+import { Button, Input, Form, Spin } from 'antd';
 import axios from 'axios';
 const FormItem = Form.Item;
-const { TextArea } = Input;
-const RadioGroup = Radio.Group;
 
-class LockForm extends React.PureComponent {
+class LockForm extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,13 +18,13 @@ class LockForm extends React.PureComponent {
             this.setState({loading: true});
             if(this.props.editData.id){
                 values.id = this.props.editData.id;
-                axios.post('/platform/user/update',values
+                axios.post('/api/user/update',values
                 ).then((res) => {
                     this.setState({loading: false});
                     this.props.handleLockOk();
                 });
             }else{
-                axios.post('/platform/user/add',values
+                axios.post('/api/user/add',values
                 ).then((res) => {
                     this.setState({loading: false});
                     this.props.handleLockOk();

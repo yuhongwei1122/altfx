@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Table, Button, Input, Tag, Row, Col } from 'antd';
+import { Table, Button, Input} from 'antd';
 import axios from 'axios';
-import DateFormate from '../../components/tool/DateFormatPan';
 import AddForm from './addForm';
 const Search = Input.Search;
 

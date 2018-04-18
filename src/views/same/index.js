@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Table, Button, Modal, Tag, notification, Select } from 'antd';
+import { Table, Button, Tag, notification, Select } from 'antd';
 import axios from 'axios';
 import DateFormate from '../../components/tool/DateFormatPan';
 import RejectModal from '../register/reject';

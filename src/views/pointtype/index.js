@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Table, Button, Modal, Tag, notification, Select } from 'antd';
+import { Table, Button, Modal, notification, Select } from 'antd';
 import axios from 'axios';
-import DateFormate from '../../components/tool/DateFormatPan';
 import RejectModal from '../register/reject'
 const ButtonGroup = Button.Group;
 const Option = Select.Option;
@@ -195,8 +193,8 @@ class PointTypeTable extends Component {
                 fixed:"right",
                 render: (text, row, index) => (
                     <ButtonGroup> 
-                        <Button style={{lineHeight:0}} onClick={this.handleEdit.bind(this,row.record_id,row.mt4_login,row.apply_commission_model)} disabled={row.status != "待审核"} title="审核" type="primary" size="small" icon="check"></Button>
-                        <Button style={{lineHeight:0}} onClick={this.handleReject.bind(this,row.record_id)} disabled={row.status != "待审核"} title="驳回" type="danger" size="small" icon="close"></Button>
+                        <Button style={{lineHeight:0}} onClick={this.handleEdit.bind(this,row.record_id,row.mt4_login,row.apply_commission_model)} disabled={row.status !== "待审核"} title="审核" type="primary" size="small" icon="check"></Button>
+                        <Button style={{lineHeight:0}} onClick={this.handleReject.bind(this,row.record_id)} disabled={row.status !== "待审核"} title="驳回" type="danger" size="small" icon="close"></Button>
                     </ButtonGroup>
                 )
             }

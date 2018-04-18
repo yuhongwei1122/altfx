@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button, Modal, Tag, Card, Row, Col, notification } from 'antd';
+import { Table, Button, notification } from 'antd';
 import axios from 'axios';
 import DateFormate from '../../components/tool/DateFormatPan';
 import OutSearchForm from './outsearch';
@@ -332,10 +332,10 @@ class PayoutTable extends Component {
                 fixed:"right",
                 render: (text,row,index) => {
                     return (<ButtonGroup> 
-                        <Button style={{lineHeight:0}} disabled={Number(row.status) != 1} onClick={this.handleFirst.bind(this,row)} title="初审" type="primary" size="small" icon="check"></Button>
-                        <Button style={{lineHeight:0}} disabled={Number(row.status) != 4} onClick={this.handleSecond.bind(this,row)} title="复审" type="primary" size="small" icon="check"></Button>
-                        <Button style={{lineHeight:0}} disabled={Number(row.status) != 1} onClick={this.handleReject.bind(this,row)} title="拒绝" type="primary" size="small" icon="close"></Button>
-                        <Button style={{lineHeight:0}} disabled={Number(row.status) != 1 && Number(row.status) != 2 && Number(row.status) != 3 && Number(row.status) != 4} onClick={this.handleBank.bind(this,row)} title="银行信息" type="primary" size="small" icon="idcard"></Button>
+                        <Button style={{lineHeight:0}} disabled={Number(row.status) !== 1} onClick={this.handleFirst.bind(this,row)} title="初审" type="primary" size="small" icon="check"></Button>
+                        <Button style={{lineHeight:0}} disabled={Number(row.status) !==4} onClick={this.handleSecond.bind(this,row)} title="复审" type="primary" size="small" icon="check"></Button>
+                        <Button style={{lineHeight:0}} disabled={Number(row.status) !== 1} onClick={this.handleReject.bind(this,row)} title="拒绝" type="primary" size="small" icon="close"></Button>
+                        <Button style={{lineHeight:0}} disabled={Number(row.status) !== 1 && Number(row.status) !== 2 && Number(row.status) !== 3 && Number(row.status) !== 4} onClick={this.handleBank.bind(this,row)} title="银行信息" type="primary" size="small" icon="idcard"></Button>
                     </ButtonGroup>);
                 }
             } 

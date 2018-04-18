@@ -1,0 +1,14 @@
+{
+    "error":{
+        "retrunCode":0,
+        "returnMessage":"ok",
+        "returnUserMessage":"ok"
+    },
+    "data":[
+        "角色管理",
+        "权限管理",
+        "注册审核",
+        "外汇牌价",
+        "返佣报告"
+    ]
+}

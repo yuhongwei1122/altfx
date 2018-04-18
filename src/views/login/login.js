@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon, Form, Input, Button, Alert } from 'antd';
+import { Icon, Form, Input, Button, Alert,message } from 'antd';
 import axios from 'axios';
 import JdbFooter from '../../components/footer/footer';
 import Logo from './logo-blue.png';
@@ -23,14 +23,24 @@ class LoginForm extends Component {
             this.setState({
                 submiting: true
             });
-            axios.post('/login/login',values)
+            axios.post('/api/login/login',values)
             .then((res) => {
-                if(res.error.returnCode === 0){
+                if(Number(res.error.returnCode) === 0){
                     this.setState({
                         submiting: false,
                         error: ""
                     });
                     console.log("跳转首页");
+                    // axios.post('/api/user/perms',values)
+                    // .then((resr) => {
+                    //     if(Number(resr.error.returnCode) === 0){
+                    //         values.perms = resr.data;
+                    //         sessionStorage.setItem("altfx_user",JSON.stringify(values));
+                    //         this.props.history.push("/overview");
+                    //     }else{
+                    //         message.error(resr.error.returnUserMessage);
+                    //     }
+                    // });
                     sessionStorage.setItem("altfx_user",JSON.stringify(values));
                     this.props.history.push("/overview");
                 }else{
@@ -57,7 +67,7 @@ class LoginForm extends Component {
                     <div> 
                         <Form onSubmit={this.handleSubmit} className="login-form">
                             <FormItem>
-                            {getFieldDecorator('userName', {
+                            {getFieldDecorator('account', {
                                 rules: [{ required: true, message: '请输入用户名' }],
                             })(
                                 <Input size="large" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="用户名" />
@@ -69,10 +79,6 @@ class LoginForm extends Component {
                             })(
                                 <Input size="large" prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="密码" />
                             )}
-                            </FormItem>
-                            <FormItem>
-                                <a className="login-form-forgot" href=""><Icon type="question-circle-o"/>忘记密码</a>
-                                <a style={{float:"right"}} className="login-form-forgot" href=""><Icon type="right-circle-o" />注册账户</a>
                             </FormItem>
                             <Button type="primary" loading={this.state.submiting} size="large" style={{width:"100%"}} htmlType="submit" className="login-form-button">
                                 登录

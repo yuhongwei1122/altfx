@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Route, Redirect} from 'react-router-dom'
 import auth from '../auth/auth.js';
 // import get from 'lodash/get';
