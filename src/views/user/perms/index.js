@@ -36,12 +36,13 @@ class PermsTable extends Component {
             ...params
         })).then((res) => {
             let pager = { ...this.state.pagination };
+            pager.total = Number(res.data.result_count);
             this.setState({
                 pagination: {
-                    total : res.data.pagination.amount,
+                    total : res.data.pagination.result_count,
                     ...pager
                 },
-                tableData : res.data.list
+                tableData : res.data.result
             });
         });
     };

@@ -35,6 +35,7 @@ class PointTypeTable extends Component {
             ...params
         })).then((res) => {
             let pager = { ...this.state.pagination };
+            pager.total = Number(res.data.result_count);
             this.setState({
                 pagination: {
                     total : Number(res.data.result_count),

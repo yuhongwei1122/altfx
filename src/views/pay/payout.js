@@ -44,6 +44,7 @@ class PayoutTable extends Component {
             ...params
         })).then((res) => {
             let pager = { ...this.state.pagination };
+            pager.total = Number(res.data.result_count);
             this.setState({
                 pagination: {
                     total : Number(res.data.result_count),
@@ -89,7 +90,7 @@ class PayoutTable extends Component {
                 result: 2,//拒绝的状态
                 ...params
             })).then((res) => {
-                notification['error']({
+                Notification['error']({
                     message: '拒绝',
                     description: '该笔出金拒绝及原因已发送至该用户邮箱～',
                     duration: 2.5
@@ -140,7 +141,7 @@ class PayoutTable extends Component {
                 result: 2,//拒绝的状态
                 ...params
             })).then((res) => {
-                notification['success']({
+                Notification['success']({
                     message: '初审完成',
                     description: '请通知相关人员该笔出金初审已完成，请复审～',
                     duration: 2.5
