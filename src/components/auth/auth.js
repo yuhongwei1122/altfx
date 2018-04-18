@@ -7,9 +7,11 @@ const Auth = {
 
     // instance auth in PrivateRoute
     checkLogin(){
-        let info = sessionStorage.getItem(PREXFIX_LOGIN);
-
-        if(info){
+        let info = {};
+        if(sessionStorage.getItem(PREXFIX_LOGIN)){
+            info = JSON.parse(sessionStorage.getItem(PREXFIX_LOGIN));
+        }
+        if(Object.keys(info).length > 0){
             // info = JSON.parse(info);
             // this.info = info;
             // this.menuMap = this._getMenuMap(info.menus);
