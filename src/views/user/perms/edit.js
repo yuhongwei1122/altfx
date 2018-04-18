@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Input, Form, Spin } from 'antd';
 import axios from 'axios';
+import qs from 'qs';
 const FormItem = Form.Item;
 const { TextArea } = Input;
 
@@ -18,14 +19,14 @@ class editForm extends Component {
             this.setState({loading: true});
             if(this.props.editData.id){
                 values.id = this.props.editData.id;
-                axios.post('/api/user/perms/update',values
-                ).then((res) => {
+                axios.post('/api/user/perms/update',qs.stringify(values
+                )).then((res) => {
                     this.setState({loading: false});
                     this.props.handleEditOk();
                 });
             }else{
-                axios.post('/api/user/perms/add',values
-                ).then((res) => {
+                axios.post('/api/user/perms/add',qs.stringify(values
+                )).then((res) => {
                     this.setState({loading: false});
                     this.props.handleEditOk();
                 });

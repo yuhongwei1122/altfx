@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Button, Input} from 'antd';
 import axios from 'axios';
+import qs from 'qs';
 import AddForm from './addForm';
 const Search = Input.Search;
 
@@ -24,10 +25,10 @@ class AddBounsTable extends Component {
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
         console.log(params);
-        axios.post('/api/bonus/agent-list',{
+        axios.post('/api/bonus/agent-list',qs.stringify({
             size: this.state.pagination.pageSize,  //每页数据条数
             ...params
-        }).then((res) => {
+        })).then((res) => {
             let pager = { ...this.state.pagination };
             this.setState({
                 pagination: {

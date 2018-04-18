@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Button, notification } from 'antd';
 import axios from 'axios';
+import qs from 'qs';
 import DateFormate from '../../components/tool/DateFormatPan';
 import SearchForm from './insearch';
 import RejectModal from './inreject';
@@ -36,11 +37,11 @@ class PayinTable extends Component {
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
         console.log(params);
-        axios.post('/api/cash/all-record',{
+        axios.post('/api/cash/all-record',qs.stringify({
             size: this.state.pagination.pageSize,  //每页数据条数
             cash_type:1,
             ...params
-        }).then((res) => {
+        })).then((res) => {
             let pager = { ...this.state.pagination };
             this.setState({
                 pagination: {
@@ -78,12 +79,12 @@ class PayinTable extends Component {
     };
     handleRejectOk = (params) => {
         if(params){
-            axios.post('/api/cash/audit',{
+            axios.post('/api/cash/audit',qs.stringify({
                 cash_order: this.state.cash_order,
                 cash_type:1,
                 result: 2,//拒绝的状态
                 ...params
-            }).then((res) => {
+            })).then((res) => {
                 notification['error']({
                     message: '拒绝',
                     description: '该笔入金拒绝及原因已发送至该用户邮箱～',
@@ -126,12 +127,12 @@ class PayinTable extends Component {
     };
     handleFirstOk = (params) => {
         if(params){
-            axios.post('/api/cash/confirm',{
+            axios.post('/api/cash/confirm',qs.stringify({
                 cash_order: this.state.cash_order,
                 cash_type:1,
                 result: 2,//拒绝的状态
                 ...params
-            }).then((res) => {
+            })).then((res) => {
                 notification['success']({
                     message: '初审完成',
                     description: '请通知相关人员该笔入金初审已完成，请复审～',
@@ -174,12 +175,12 @@ class PayinTable extends Component {
     };
     handleSecondOk = (params) => {
         if(params){
-            axios.post('/api/cash/audit',{
+            axios.post('/api/cash/audit',qs.stringify({
                 cash_order: this.state.cash_order,
                 cash_type:1,
                 result: 2,//拒绝的状态
                 ...params
-            }).then((res) => {
+            })).then((res) => {
                 notification['success']({
                     message: '入金完成',
                     description: '入金成功通知邮件已发送至该用户邮箱～',
@@ -212,7 +213,7 @@ class PayinTable extends Component {
         this.fetchData({page:1,...params});
     };
     componentDidMount(){
-        console.log("did mount 中当前的页："+this.state.pagination.current);
+        // console.log("did mount 中当前的页："+this.state.pagination.current);
         this.fetchData({page:1});
     };
     render() {

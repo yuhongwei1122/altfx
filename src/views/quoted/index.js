@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Button, Tag, Card, Row, Col } from 'antd';
 import axios from 'axios';
+import qs from 'qs';
 import DateFormate from '../../components/tool/DateFormatPan';
 import EditForm from './edit';
 import './index.css'
@@ -25,11 +26,11 @@ class QuotedTable extends Component {
     };
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
-        console.log(params);
-        axios.post('/api/cash/rate-record',{
+        // console.log(params);
+        axios.post('/api/cash/rate-record',qs.stringify({
             size: this.state.pagination.pageSize,  //每页数据条数
             ...params
-        }).then((res) => {
+        })).then((res) => {
             let pager = { ...this.state.pagination };
             this.setState({
                 pagination: {
@@ -41,18 +42,18 @@ class QuotedTable extends Component {
         });
     };
     getInRate = () => {
-        axios.post('/api/cash/rate-query',{
+        axios.post('/api/cash/rate-query',qs.stringify({
             rate_type: 1
-        }).then((res) => {
+        })).then((res) => {
             this.setState({
                 inRate : res.data.rate
             });
         });
     };
     getOutRate = () => {
-        axios.post('/api/cash/rate-query',{
+        axios.post('/api/cash/rate-query',qs.stringify({
             rate_type: 2
-        }).then((res) => {
+        })).then((res) => {
             this.setState({
                 outRate : res.data.rate
             });
@@ -96,7 +97,7 @@ class QuotedTable extends Component {
         this.initCurrentRate();
     };
     componentDidMount(){
-        console.log("did mount 中当前的页："+this.state.pagination.current);
+        // console.log("did mount 中当前的页："+this.state.pagination.current);
         this.fetchData({page:1});
         this.initCurrentRate();
     };

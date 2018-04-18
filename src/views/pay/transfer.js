@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Button, Modal, Tag, Card, Row, Col, notification } from 'antd';
 import axios from 'axios';
+import qs from 'qs';
 import DateFormate from '../../components/tool/DateFormatPan';
 const ButtonGroup = Button.Group;
 
@@ -21,12 +22,12 @@ class TransferTable extends Component {
     };
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
-        console.log(params);
-        axios.post('/api/cash/all-record',{
+        // console.log(params);
+        axios.post('/api/cash/all-record',qs.stringify({
             size: this.state.pagination.pageSize,  //每页数据条数
             cash_type:1,
             ...params
-        }).then((res) => {
+        })).then((res) => {
             let pager = { ...this.state.pagination };
             this.setState({
                 pagination: {
@@ -40,7 +41,7 @@ class TransferTable extends Component {
         });
     };
     componentDidMount(){
-        console.log("did mount 中当前的页："+this.state.pagination.current);
+        // console.log("did mount 中当前的页："+this.state.pagination.current);
         this.fetchData({page:1});
     };
     render() {

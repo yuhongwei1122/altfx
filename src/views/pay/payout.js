@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Button, notification } from 'antd';
 import axios from 'axios';
+import qs from 'qs';
 import DateFormate from '../../components/tool/DateFormatPan';
 import OutSearchForm from './outsearch';
 import OutRjectModal from './outreject';
@@ -37,12 +38,11 @@ class PayoutTable extends Component {
     };
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
-        console.log(params);
-        axios.post('/api/cash/all-record',{
+        axios.post('/api/cash/all-record',qs.stringify({
             size: this.state.pagination.pageSize,  //每页数据条数
             cash_type:2,
             ...params
-        }).then((res) => {
+        })).then((res) => {
             let pager = { ...this.state.pagination };
             this.setState({
                 pagination: {
@@ -67,11 +67,11 @@ class PayoutTable extends Component {
         });
     };
     handleReject = (row) => {
-        axios.post('/api/image/get-url',{
+        axios.post('/api/image/get-url',qs.stringify({
             account: row.account,
             type:5,
             bank_no: row.bank_no
-        }).then((res) => {
+        })).then((res) => {
             // return res.data.image_url || "";
             row.bank_img = res.data.image_url || "";
             this.setState({
@@ -83,12 +83,12 @@ class PayoutTable extends Component {
     };
     handleRejectOk = (params) => {
         if(params){
-            axios.post('/api/cash/audit',{
+            axios.post('/api/cash/audit',qs.stringify({
                 cash_order: this.state.cash_order,
                 cash_type:1,
                 result: 2,//拒绝的状态
                 ...params
-            }).then((res) => {
+            })).then((res) => {
                 notification['error']({
                     message: '拒绝',
                     description: '该笔出金拒绝及原因已发送至该用户邮箱～',
@@ -118,11 +118,11 @@ class PayoutTable extends Component {
         }
     };
     handleFirst = (row) => {
-        axios.post('/api/image/get-url',{
+        axios.post('/api/image/get-url',qs.stringify({
             account: row.account,
             type:5,
             bank_no: row.bank_no
-        }).then((res) => {
+        })).then((res) => {
             // return res.data.image_url || "";
             row.bank_img = res.data.image_url || "";
             this.setState({
@@ -134,12 +134,12 @@ class PayoutTable extends Component {
     };
     handleFirstOk = (params) => {
         if(params){
-            axios.post('/api/cash/audit',{
+            axios.post('/api/cash/audit',qs.stringify({
                 cash_order: this.state.cash_order,
                 cash_type:1,
                 result: 2,//拒绝的状态
                 ...params
-            }).then((res) => {
+            })).then((res) => {
                 notification['success']({
                     message: '初审完成',
                     description: '请通知相关人员该笔出金初审已完成，请复审～',
@@ -159,11 +159,11 @@ class PayoutTable extends Component {
         }
     };
     handleSecond = (row) => {
-        axios.post('/api/image/get-url',{
+        axios.post('/api/image/get-url',qs.stringify({
             account: row.account,
             type:5,
             bank_no: row.bank_no
-        }).then((res) => {
+        })).then((res) => {
             // return res.data.image_url || "";
             row.bank_img = res.data.image_url || "";
             this.setState({
@@ -175,12 +175,12 @@ class PayoutTable extends Component {
     };
     handleSecondOk = (params) => {
         if(params){
-            axios.post('/api/cash/confirm',{
+            axios.post('/api/cash/confirm',qs.stringify({
                 cash_order: this.state.cash_order,
                 cash_type:1,
                 result: 2,//拒绝的状态
                 ...params
-            }).then((res) => {
+            })).then((res) => {
                 notification['success']({
                     message: '入金完成',
                     description: '出金成功通知邮件已发送至该用户邮箱～',
@@ -200,11 +200,11 @@ class PayoutTable extends Component {
         }
     };
     handleBank = (row) => {
-        axios.post('/api/image/get-url',{
+        axios.post('/api/image/get-url',qs.stringify({
             account: row.account,
             type:5,
             bank_no: row.bank_no
-        }).then((res) => {
+        })).then((res) => {
             // return res.data.image_url || "";
             row.bank_img = res.data.image_url || "";
             this.setState({
@@ -224,7 +224,7 @@ class PayoutTable extends Component {
         this.fetchData({page:1,...params});
     };
     componentDidMount(){
-        console.log("did mount 中当前的页："+this.state.pagination.current);
+        // console.log("did mount 中当前的页："+this.state.pagination.current);
         this.fetchData({page:1});
     };
     render() {

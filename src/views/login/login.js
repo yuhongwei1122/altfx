@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Icon, Form, Input, Button, Alert,message } from 'antd';
 import axios from 'axios';
+import qs from 'qs';
 import JdbFooter from '../../components/footer/footer';
 import Logo from './logo-blue.png';
 import './login.css';
@@ -23,7 +24,7 @@ class LoginForm extends Component {
             this.setState({
                 submiting: true
             });
-            axios.post('/api/login/login',values)
+            axios.post('/api/login/login',qs.stringify(values))
             .then((res) => {
                 if(Number(res.error.returnCode) === 0){
                     this.setState({
@@ -31,7 +32,7 @@ class LoginForm extends Component {
                         error: ""
                     });
                     console.log("跳转首页");
-                    // axios.post('/api/user/perms',values)
+                    // axios.post('/api/user/perms',qs.stringify(values))
                     // .then((resr) => {
                     //     if(Number(resr.error.returnCode) === 0){
                     //         values.perms = resr.data;

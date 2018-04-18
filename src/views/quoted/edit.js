@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { InputNumber, Form, Spin, Radio, Modal } from 'antd';
 import axios from 'axios';
+import qs from 'qs';
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 
@@ -17,8 +18,8 @@ class editForm extends PureComponent {
           if (!err) {
             //   console.log(values);
             this.setState({loading: true});
-            axios.post('/platform/user/add',values
-            ).then((res) => {
+            axios.post('/platform/user/add',qs.stringify(values
+            )).then((res) => {
                 this.setState({loading: false});
                 this.props.handleEditOk();
             });

@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { InputNumber, Input, Form, Spin, Modal } from 'antd';
 import axios from 'axios';
+import qs from 'qs';
 const FormItem = Form.Item;
 const { TextArea } = Input;
 
@@ -17,8 +18,8 @@ class addForm extends PureComponent {
           if (!err) {
             //   console.log(values);
             this.setState({loading: true});
-            axios.post('/api/bonus/create',values
-            ).then((res) => {
+            axios.post('/api/bonus/create',qs.stringify(values
+            )).then((res) => {
                 this.setState({loading: false});
                 this.props.handleEditOk();
             });

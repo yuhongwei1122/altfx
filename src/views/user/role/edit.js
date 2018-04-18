@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Input, Form, Spin, Checkbox } from 'antd';
 import axios from 'axios';
+import qs from 'qs';
 const FormItem = Form.Item;
 const { TextArea } = Input;
 const CheckboxGroup = Checkbox.Group;
@@ -27,14 +28,14 @@ class editForm extends Component {
             this.setState({loading: true});
             if(this.props.editData.id){
                 values.id = this.props.editData.id;
-                axios.post('/api/user/role/update',values
-                ).then((res) => {
+                axios.post('/api/user/role/update',qs.stringify(values
+                )).then((res) => {
                     this.setState({loading: false,checkedList:[]});
                     this.props.handleEditOk();
                 });
             }else{
-                axios.post('/api/user/role/add',values
-                ).then((res) => {
+                axios.post('/api/user/role/add',qs.stringify(values
+                )).then((res) => {
                     this.setState({loading: false,checkedList:[]});
                     this.props.handleEditOk();
                 });
@@ -57,11 +58,9 @@ class editForm extends Component {
         });
     };
     componentDidMount(){
-        axios.get('/api/user/perms',{
-            params:{
-                limit: 20
-            }
-        })
+        axios.post('/api/user/perms',qs.stringify({
+            limit: 20
+        }))
         .then((res) => {
             let list = [];
             let allCheck = [];
@@ -71,7 +70,7 @@ class editForm extends Component {
                     allCheck.push(item.id);
                 });
             }
-            console.log(list);
+            // console.log(list);
             this.setState({
                 permList: list,
                 allCheck: allCheck,

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Table, Button, Modal, Tag, Card, Row, Col } from 'antd';
 import axios from 'axios';
+import qs from 'qs';
 import DateFormate from '../../components/tool/DateFormatPan';
 import SearchForm from './search';
 const ButtonGroup = Button.Group;
@@ -27,10 +28,10 @@ class BonusTable extends Component {
     fetchTotal = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
         console.log(params);
-        axios.post('/api/bonus/summary',{
+        axios.post('/api/bonus/summary',qs.stringify({
             login_unique_code: "",  //登录用户的ID
             ...params
-        }).then((res) => {
+        })).then((res) => {
             this.setState({
                 total_bonus: res.data.total_bonus,
                 total_users: res.data.total_users,
@@ -41,10 +42,10 @@ class BonusTable extends Component {
     fetchTable = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
         console.log(params);
-        axios.post('/api/bonus/detail',{
+        axios.post('/api/bonus/detail',qs.stringify({
             size: this.state.pagination.pageSize,  //每页数据条数
             ...params
-        }).then((res) => {
+        })).then((res) => {
             let pager = { ...this.state.pagination };
             this.setState({
                 pagination: {
@@ -88,10 +89,10 @@ class BonusTable extends Component {
             okText: '确认',
             cancelText: '取消',
             onOk() {
-                axios.post('/api/bonus/cancel',{
+                axios.post('/api/bonus/cancel',qs.stringify({
                     bonus_order: bonus_order,
                     agent_unique_code: agent_unique_code
-                }).then((res) => {
+                })).then((res) => {
                     console.log("取消奖金发放成功---");
                 });
             }
@@ -104,10 +105,10 @@ class BonusTable extends Component {
             okText: '确认',
             cancelText: '取消',
             onOk() {
-                axios.post('/api/bonus/confirm',{
+                axios.post('/api/bonus/confirm',qs.stringify({
                     bonus_order: row.bonus_order,
                     agent_unique_code: row.agent_unique_code
-                }).then((res) => {
+                })).then((res) => {
                     console.log("奖金发放成功---");
                 });
             }

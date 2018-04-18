@@ -16,7 +16,7 @@ app.post('/api/user/perms',(req, res) => {
     res.send(require('./data/common/perms.json'));
 });
 //-----角色管理-----
-app.get('/api/user/role',(req, res) => {
+app.post('/api/user/role',(req, res) => {
     res.send(require('./data/user/role.json'));
 });
 app.post('/api/user/role/delete',(req, res) => {
@@ -29,7 +29,7 @@ app.post('/api/user/role/update',(req, res) => {
     res.send(require('./data/common/ok.json'));
 });
 //-----权限管理-----
-app.get('/api/user/perms',(req, res) => {
+app.post('/api/user/perms',(req, res) => {
     res.send(require('./data/user/perms.json'));
 });
 app.post('/api/user/perms/delete',(req, res) => {
@@ -42,7 +42,7 @@ app.post('/api/user/perms/update',(req, res) => {
     res.send(require('./data/common/ok.json'));
 });
 //-----用户管理-----
-app.get('/api/user/list',(req, res) => {
+app.post('/api/user/list',(req, res) => {
     res.send(require('./data/user/user.json'));
 });
 app.post('/api/user/delete',(req, res) => {

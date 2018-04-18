@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Tabs, Row, Col, List, Card, Divider, Icon, Button, message } from 'antd';
 import axios from 'axios';
+import qs from 'qs';
 import RejectModal from './reject';
 import SuccessModal from './success';
 
@@ -81,11 +82,11 @@ export default class Detail extends Component{
     };
     handleRejectOk = (params) => {
         if(params){
-            axios.post('/api/register/audit',{
+            axios.post('/api/register/audit',qs.stringify({
                 user_id: this.state.detail.id,
                 result: 2,//拒绝的状态
                 ...params
-            }).then((res) => {
+            })).then((res) => {
                 this.setState({
                     rejectVisable: false
                 });
@@ -103,10 +104,10 @@ export default class Detail extends Component{
     };
     handleSuccessOk = (params) =>{
         if(params){
-            axios.post('/api/register/audit',{
+            axios.post('/api/register/audit',qs.stringify({
                 user_id: this.state.detail.id,
                 ...params
-            }).then((res) => {
+            })).then((res) => {
                 this.setState({
                     successVisable: false
                 });
@@ -118,10 +119,10 @@ export default class Detail extends Component{
         }
     };
     fetchFrontCard = () => {
-        axios.post('/api/image/get-url',{
+        axios.post('/api/image/get-url',qs.stringify({
             account: this.state.detail.account || "",
             type:1
-        }).then((res) => {
+        })).then((res) => {
             if(Number(res.error.returnCode) === 0){
                 this.setState({
                     identity_front_image: res.data.image_url
@@ -132,10 +133,10 @@ export default class Detail extends Component{
         });
     };
     fetchBackCard = () => {
-        axios.post('/api/image/get-url',{
+        axios.post('/api/image/get-url',qs.stringify({
             account: this.state.detail.account || "",
             type:2
-        }).then((res) => {
+        })).then((res) => {
             if(Number(res.error.returnCode) === 0){
                 this.setState({
                     identity_back_image: res.data.image_url
@@ -146,10 +147,10 @@ export default class Detail extends Component{
         });
     };
     fetchRiskCard = () => {
-        axios.post('/api/image/get-url',{
+        axios.post('/api/image/get-url',qs.stringify({
             account: this.state.detail.account || "",
             type:3
-        }).then((res) => {
+        })).then((res) => {
             if(Number(res.error.returnCode) === 0){
                 this.setState({
                     risk_tips_image: res.data.image_url
@@ -168,9 +169,9 @@ export default class Detail extends Component{
         }));
     };
     componentDidMount(){
-        axios.post('/api/register/user-detail',{
+        axios.post('/api/register/user-detail',qs.stringify({
             user_id: this.props.match.params.user_id || ""
-        }).then((res) => {
+        })).then((res) => {
             if(Number(res.error.returnCode) === 0){
                 this.setState({
                     detail: res.data,

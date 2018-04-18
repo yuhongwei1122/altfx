@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Button, Input, Form, Spin, Radio } from 'antd';
 import axios from 'axios';
+import qs from 'qs';
 const FormItem = Form.Item;
 const { TextArea } = Input;
 const RadioGroup = Radio.Group;
@@ -22,14 +23,14 @@ class editForm extends PureComponent {
             this.setState({loading: true});
             if(this.props.editData.id){
                 values.id = this.props.editData.id;
-                axios.post('/api/user/update',values
-                ).then((res) => {
+                axios.post('/api/user/update',qs.stringify(values
+                )).then((res) => {
                     this.setState({loading: false});
                     this.props.handleEditOk();
                 });
             }else{
-                axios.post('/api/user/add',values
-                ).then((res) => {
+                axios.post('/api/user/add',qs.stringify(values
+                )).then((res) => {
                     this.setState({loading: false});
                     this.props.handleEditOk();
                 });
@@ -38,11 +39,9 @@ class editForm extends PureComponent {
         });
     };
     componentDidMount(){
-        axios.get('/api/user/role',{
-            params:{
-                limit: 20
-            }
-        })
+        axios.post('/api/user/role',qs.stringify({
+            limit: 20
+        }))
         .then((res) => {
             let list = [];
             if(res.data.list.length > 0){

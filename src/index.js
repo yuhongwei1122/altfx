@@ -10,6 +10,7 @@ import registerServiceWorker from './registerServiceWorker';
 import moment from 'moment';
 import md5 from 'md5';
 // 异步请求响应拦截器
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.interceptors.response.use(function (response) {
     // Do something with response data
     // console.log(response);
@@ -32,7 +33,6 @@ axios.interceptors.response.use(function (response) {
 // 异步请求请求拦截器
 axios.interceptors.request.use(function (config) {
     // Do something before request is sent
-    console.log(config);
     let userinfo = {};
     if(sessionStorage.getItem("altfx_user")){
         userinfo = JSON.parse(sessionStorage.getItem("altfx_user"));
@@ -40,8 +40,11 @@ axios.interceptors.request.use(function (config) {
     console.log(config);
     let data = {};
     if(config.data!=undefined){
-        console.log(config.data);
-        data = config.data;
+        let strs = config.data.split("&");
+        for (var i = 0; i < strs.length; i++) {
+            data[strs[i].split("=")[0]] = (strs[i].split("=")[1]);
+        }
+        // data = config.data;
     }
     if(userinfo['token']!== undefined && userinfo['token']!== '' && userinfo['token']!== null){
         data.token = userinfo['token'];
@@ -61,12 +64,18 @@ axios.interceptors.request.use(function (config) {
         sign.push(data[key]);
     });
     sign.push("crm-front");
-    console.log(sign);
+    // console.log(sign);
+    console.log(sign.join("|"));
     sign = md5(sign.join("|"));
     // console.log(sign);
     data['sign'] = sign;
-    // console.log(config.data);
-    config.data = data;
+    // console.log(data);
+    let keystr = [];
+    Object.keys(data).forEach((key)=>{
+        keystr.push(key + "=" + data[key]);
+    });
+    config.data = keystr.join("&");
+    config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
     return config;
 }, function (error) {
     // Do something with request error

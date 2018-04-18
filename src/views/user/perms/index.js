@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Button, Modal } from 'antd';
 import axios from 'axios';
+import qs from 'qs';
 import DeleteModel from '../../../components/tool/deleteCommonModel';
 import DateFormate from '../../../components/tool/DateFormatPan';
 import EditForm from './edit';
@@ -29,13 +30,11 @@ class PermsTable extends Component {
     };
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
-        console.log(params);
-        axios.get('/api/user/perms',{
-            params: {
-				limit: this.state.pagination.pageSize,  //每页数据条数
-                ...params
-            }
-        }).then((res) => {
+        // console.log(params);
+        axios.post('/api/user/perms',qs.stringify({
+            limit: this.state.pagination.pageSize,  //每页数据条数
+            ...params
+        })).then((res) => {
             let pager = { ...this.state.pagination };
             this.setState({
                 pagination: {
@@ -59,7 +58,7 @@ class PermsTable extends Component {
     };
     //删除操作
     showDelModal = (id) => {
-        console.log("需要下线的id="+id);
+        // console.log("需要下线的id="+id);
         this.setState({
             delId: id,
             deleteVisable: true
@@ -69,9 +68,9 @@ class PermsTable extends Component {
         this.setState({
             confirmLoading: true
         });
-        axios.post('/api/user/perms/delete',{
+        axios.post('/api/user/perms/delete',qs.stringify({
             id: this.state.delId
-        }).then((res) => {
+        })).then((res) => {
             this.setState({
                 delId : '',
                 deleteVisable: false,
@@ -109,7 +108,7 @@ class PermsTable extends Component {
         });
     };
     componentDidMount(){
-        console.log("did mount 中当前的页："+this.state.pagination.current);
+        // console.log("did mount 中当前的页："+this.state.pagination.current);
         this.fetchData({page:0});
     };
     render() {

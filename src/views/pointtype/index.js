@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Button, Modal, notification, Select } from 'antd';
 import axios from 'axios';
+import qs from 'qs';
 import RejectModal from '../register/reject'
 const ButtonGroup = Button.Group;
 const Option = Select.Option;
@@ -28,11 +29,11 @@ class PointTypeTable extends Component {
     };
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
-        console.log(params);
-        axios.post('/api/member/ucmr-list',{
+        // console.log(params);
+        axios.post('/api/member/ucmr-list',qs.stringify({
             size: this.state.pagination.pageSize,  //每页数据条数
             ...params
-        }).then((res) => {
+        })).then((res) => {
             let pager = { ...this.state.pagination };
             this.setState({
                 pagination: {
@@ -55,7 +56,7 @@ class PointTypeTable extends Component {
         });
     };
     handleSearch = (value) => {
-        console.log(value);
+        // console.log(value);
         this.fetchData({page:1,status:value});
     };
     handleReject = (id) => {
@@ -66,11 +67,11 @@ class PointTypeTable extends Component {
     };
     handleRejectOk = (params) => {
         if(params){
-            axios.post('/api/validate/change-commission-model',{
+            axios.post('/api/validate/change-commission-model',qs.stringify({
                 record_id: this.state.rejectId,
                 status: 2,//拒绝的状态
                 ...params
-            }).then((res) => {
+            })).then((res) => {
                 notification['error']({
                     message: '审核拒绝',
                     description: '修改拒绝及拒绝原因邮件已发送至该用户邮箱～',
@@ -98,10 +99,10 @@ class PointTypeTable extends Component {
     };
     handleEditOk = () => {
         this.setState({confirmLoading:true});
-        axios.post('/api/validate/change-commission-model',{
+        axios.post('/api/validate/change-commission-model',qs.stringify({
             record_id: this.state.rejectId,
             status: 1,//拒绝的状态
-        }).then((res) => {
+        })).then((res) => {
             notification['success']({
                 message: '审核通过',
                 description: '修改成功邮件已发送至该用户邮箱～',
@@ -126,7 +127,7 @@ class PointTypeTable extends Component {
         });
     };
     componentDidMount(){
-        console.log("did mount 中当前的页："+this.state.pagination.current);
+        // console.log("did mount 中当前的页："+this.state.pagination.current);
         this.fetchData({page:1});
     };
     render() {

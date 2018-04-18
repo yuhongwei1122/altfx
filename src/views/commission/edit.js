@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Button, Table, Input, Row, Col, Card, Form, Spin, Divider, Icon } from 'antd';
 import axios from 'axios';
+import qs from 'qs';
 import './edit.css';
 const FormItem = Form.Item;
 
@@ -29,11 +30,10 @@ class editForm extends PureComponent {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
           if (!err) {
-            console.log(values);
             values.agent_code = this.state.unique_code;
             values.parent_code = this.state.parent_code;
             this.setState({loading: true});
-            axios.post('/api/validate/change-agent-commission',values
+            axios.post('/api/validate/change-agent-commission',qs.stringify(values)
             ).then((res) => {
                 this.props.history.push("/commission/list");
             });
@@ -46,9 +46,9 @@ class editForm extends PureComponent {
         this.props.history.push("/commission/list");
     };
     getCommission = () => {
-        axios.post('/api/member/agent-commission-configuration',{
+        axios.post('/api/member/agent-commission-configuration',qs.stringify({
             unique_code: this.props.match.params.unique_code
-        }).then((res) => {
+        })).then((res) => {
             this.setState({loading: false});
             // console.log(res);
             const temp =[...this.state.data];

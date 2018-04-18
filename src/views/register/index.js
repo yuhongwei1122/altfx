@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Table, Button, Modal, Tag, notification } from 'antd';
 import axios from 'axios';
+import qs from 'qs';
 import DeleteModel from '../../components/tool/deleteCommonModel';
 import DateFormate from '../../components/tool/DateFormatPan';
 import SearchForm from './search';
@@ -25,11 +26,11 @@ class RegisterTable extends Component {
     };
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
-        console.log(params);
-        axios.post('/api/register/list',{
+        // console.log(params);
+        axios.post('/api/register/list',qs.stringify({
             size: this.state.pagination.pageSize,  //每页数据条数
             ...params
-        }).then((res) => {
+        })).then((res) => {
             let pager = { ...this.state.pagination };
             this.setState({
                 pagination: {
@@ -63,9 +64,9 @@ class RegisterTable extends Component {
             cancelText: '取消',
             onOk() {
                 console.log("点击了确认。。。开始处理发送");
-                axios.post('/api/register/send',{
+                axios.post('/api/register/send',qs.stringify({
                     user_id: id
-                }).then((res) => {
+                })).then((res) => {
                     
                     return new Promise((resolve, reject) => {
                         setTimeout(resolve,1000);
@@ -81,7 +82,7 @@ class RegisterTable extends Component {
         });
     };
     componentDidMount(){
-        console.log("did mount 中当前的页："+this.state.pagination.current);
+        // console.log("did mount 中当前的页："+this.state.pagination.current);
         this.fetchData({page:1});
     };
     render() {

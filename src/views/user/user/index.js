@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Button, Modal } from 'antd';
 import axios from 'axios';
+import qs from 'qs';
 import DeleteModel from '../../../components/tool/deleteCommonModel';
 import DateFormate from '../../../components/tool/DateFormatPan';
 import EditForm from './edit';
@@ -32,12 +33,10 @@ class UserTable extends Component {
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
         console.log(params);
-        axios.get('/api/user/list',{
-            params: {
-				limit: this.state.pagination.pageSize,  //每页数据条数
-                ...params
-            }
-        }).then((res) => {
+        axios.post('/api/user/list',qs.stringify({
+            limit: this.state.pagination.pageSize,  //每页数据条数
+            ...params
+        })).then((res) => {
             let pager = { ...this.state.pagination };
             this.setState({
                 pagination: {
@@ -61,7 +60,7 @@ class UserTable extends Component {
     };
     //删除操作
     showDelModal = (id) => {
-        console.log("需要下线的id="+id);
+        // console.log("需要下线的id="+id);
         this.setState({
             delId: id,
             deleteVisable: true
@@ -71,9 +70,9 @@ class UserTable extends Component {
         this.setState({
             confirmLoading: true
         });
-        axios.post('/api/user/delete',{
+        axios.post('/api/user/delete',qs.stringify({
             id: this.state.delId
-        }).then((res) => {
+        })).then((res) => {
             this.setState({
                 delId : '',
                 deleteVisable: false,
@@ -90,7 +89,7 @@ class UserTable extends Component {
         });
     };
     showEditModal = (item) => {
-        console.log(item);
+        // console.log(item);
         this.setState({
             detail: Object.assign({},item),
             editVisabled: true,
@@ -129,7 +128,7 @@ class UserTable extends Component {
         });
     };
     componentDidMount(){
-        console.log("did mount 中当前的页："+this.state.pagination.current);
+        // console.log("did mount 中当前的页："+this.state.pagination.current);
         this.fetchData({page:0});
     };
     render() {
