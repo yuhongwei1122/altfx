@@ -16,7 +16,8 @@ axios.interceptors.response.use(function (response) {
     // console.log(response);
     if(response.data.error && Number(response.data.error.returnCode) === 99){
         console.log("登陆失效");
-        window.location.href = "/";
+        message.error(response.data.error.returnUserMessage);
+        // window.location.href = "/";
     }else{
         if(Number(response.data.error.returnCode) === 0 || Number(response.data.error.returnCode) === 1 || Number(response.data.error.returnCode) === 2 || Number(response.data.error.returnCode) === 3 || Number(response.data.error.returnCode) === 4){
             return response.data;

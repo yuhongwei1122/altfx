@@ -244,7 +244,14 @@ export default class Detail extends Component{
             {
                 key: "wechat",
                 name: "wechat",
-                typeFlag: true
+                typeFlag: true,
+                render: (text) => {
+                    if(text !== undefined){
+                        return text;
+                    }else{
+                        return "--"
+                    }
+                }
             }
         ];
         const { detail } = this.state;
@@ -263,23 +270,23 @@ export default class Detail extends Component{
                             </Col>
                             <Col span={6}>
                                 <Card title="身份证正面照片">
-                                    <img alt="" src={detail.identity_front_image}/>
+                                    <img alt="" src={this.state.identity_front_image}/>
                                 </Card>
                             </Col>
                             <Col span={6}>
                                 <Card title="身份证反面照片">
-                                    <img alt="" src={detail.identity_front_image}/>
+                                    <img alt="" src={this.state.identity_front_image}/>
                                 </Card>
                             </Col>
                             <Col span={6}>
                                 <Card title="手持身份证照片">
-                                    <img alt="" src={detail.identity_front_image}/>
+                                    <img alt="" src={this.state.identity_front_image}/>
                                 </Card>
                             </Col>
                         </Row>
                     </TabPane>
                     {
-                        detail.account_type === 1 ?
+                        Number(detail.account_type) === 1 ?
                         <TabPane tab="交易账户" key="3">
                             <Row gutter={16} key="5">
                                 {this.getRowTrades(detail)}

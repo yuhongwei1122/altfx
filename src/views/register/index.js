@@ -127,9 +127,9 @@ class RegisterTable extends Component {
                 key: 'account_type',
                 width: 100,
                 render: (text) => {
-                    if(text === 1){
+                    if(Number(text) === 1){
                         return "普通用户";
-                    }else if(text === 2){
+                    }else if(Number(text) === 2){
                         return "代理商";
                     }else{
                         return "模拟账户";
