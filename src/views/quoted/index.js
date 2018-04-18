@@ -70,7 +70,7 @@ class QuotedTable extends Component {
     };
     initCurrentRate = () => {
         console.log("执行了吗");
-        axios.all([this.getOutRate(), this.getInRate()])
+        axios.all([this.getOutRate(), this.getInRate(),this.fetchData({page:1})])
         .then(axios.spread(function (acct, perms) {
             // Both requests are now complete
             console.log(perms);
@@ -102,13 +102,13 @@ class QuotedTable extends Component {
         this.setState({
             editVisable: false
         });
-        this.fetchData({page:1});
+        // this.fetchData({page:1});
         this.initCurrentRate();
     };
     componentDidMount(){
         // console.log("did mount 中当前的页："+this.state.pagination.current);
-        this.fetchData({page:1});
-        // this.initCurrentRate();
+        this.initCurrentRate();
+        // this.fetchData({page:1});
     };
     render() {
         const columns = [
