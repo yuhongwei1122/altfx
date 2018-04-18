@@ -152,9 +152,7 @@ class TransferTable extends Component {
         ];
         return (
             <div className="report">
-                <div style={{marginTop:10}}>
-                    <SearchForm handleSearch={this.handleSearch}/>
-                </div>
+                
                 <div style={{marginTop:10}}>
                     <Table 
                         rowKey={record => record.id}
@@ -164,10 +162,7 @@ class TransferTable extends Component {
                         onChange={this.handleChange}
                         scroll={{ x: 1370,y: 540 }} />
                 </div>
-                <RejectModal modalTitle="拒绝" rejectVisable={this.state.rejectVisable} handleRejectOk={this.handleRejectOk} inpay={this.state.data}/>
-                <FirstModal modalTitle="初审" firstVisable={this.state.firstVisable} handleFirstOk={this.handleFirstOk} inpay={this.state.data}/>
-                <SecondModal modalTitle="复审" secondVisable={this.state.secondVisable} handleSecondOk={this.handleSecondOk} inpay={this.state.data}/>
-                
+               
             </div>
         );
     }
