@@ -107,15 +107,15 @@ class QuotedTable extends Component {
                 title: '货币名称',
                 dataIndex: 'id',
                 key: 'id',
-                render: ()=>{
+                render: (text)=>{
                     return "USD"
                 }
             },
             {
                 title: '交易单位',
                 dataIndex: '',
-                key: '',
-                render: ()=>{
+                key: 'y',
+                render: (text)=>{
                     return "$(美元)"
                 }
             },

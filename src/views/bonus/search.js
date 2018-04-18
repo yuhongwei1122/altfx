@@ -17,12 +17,14 @@ class SearchForm extends Component{
     handleSearch = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
-          console.log('Received values of form: ', values);
-          const day = values.search_date;
-          values.from = day[0].unix();
-          values.to = day[1].unix();
-          values.search_date = null;
-          this.props.handleSearch(values);
+            console.log('Received values of form: ', values);
+            if(values.search_date){
+                const day = values.search_date;
+                values.from = day[0].unix();
+                values.to = day[1].unix();
+                values.search_date = null;
+            }
+            this.props.handleSearch(values);
         });
     };
     handleReset = (e) => {

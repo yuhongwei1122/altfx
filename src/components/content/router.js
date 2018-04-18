@@ -95,4 +95,10 @@ export default [
         private: true,
         component: () => import('../../views/bonus/add')
     },
+    {
+        path: '/pay/transfer',
+        name: '转账审核',
+        private: true,
+        component: () => import('../../views/pay/transfer')
+    },
 ]

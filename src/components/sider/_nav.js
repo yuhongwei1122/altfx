@@ -107,7 +107,7 @@ const menuData = [
                 role:["admin_tina"],
             },
             {
-                key: 'bonus_add',
+                key: 'transfer',
                 name: '转账审核',
                 path: '/pay/tranfer',
                 icon: 'plus',
