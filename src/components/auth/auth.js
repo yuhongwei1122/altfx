@@ -16,9 +16,9 @@ const Auth = {
             // this.info = info;
             // this.menuMap = this._getMenuMap(info.menus);
             return true;
+        }else{
+            return false;
         }
-
-        return false;
     },
     getInfo() {
         return this.info;

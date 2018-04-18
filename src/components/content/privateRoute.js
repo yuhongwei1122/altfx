@@ -11,14 +11,14 @@ function PrivateRoute({component: Component, path: path, ...rest}) {
             if (auth && auth.checkLogin()) {
 
                 // 登陆成功后，检查用户页面访问权限
-                if(process.env.NODE_ENV !== 'development' && !auth.checkMenuPermissions(path)){
-                    return (
-                        <Redirect to={{
-                            pathname: '/403',
-                                state: { from: props.location }
-                        }}/>
-                    )
-                }
+                // if(process.env.NODE_ENV !== 'development' && !auth.checkMenuPermissions(path)){
+                //     return (
+                //         <Redirect to={{
+                //             pathname: '/403',
+                //                 state: { from: props.location }
+                //         }}/>
+                //     )
+                // }
 
                 return (
                     <Component {...props}/>
