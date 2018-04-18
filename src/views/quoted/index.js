@@ -108,7 +108,7 @@ class QuotedTable extends Component {
     componentDidMount(){
         // console.log("did mount 中当前的页："+this.state.pagination.current);
         this.fetchData({page:1});
-        this.initCurrentRate();
+        // this.initCurrentRate();
     };
     render() {
         const columns = [

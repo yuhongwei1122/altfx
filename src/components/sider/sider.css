@@ -5,7 +5,7 @@
   text-align: center;
 }
 .jdb-sider .logo img {
-  width: 180px;
+  width: 160px;
   height: auto;
 }
 .jdb-sider .small-logo {
@@ -15,8 +15,8 @@
   text-align: center;
 }
 .jdb-sider .small-logo img {
-  width: 60px;
-  height: auto;
+  height: 50px;
+  width: auto;
 }
 .jdb-sider .ant-menu-inline .ant-menu-item {
   margin-top: 0px;
