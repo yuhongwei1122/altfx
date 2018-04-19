@@ -289,18 +289,21 @@ export default class Detail extends Component{
                                 <Card title="身份证号">{detail.identity}</Card>
                             </Col>
                             <Col span={6}>
-                                <Card title="身份证正面照片">
-                                    <img alt="" src={this.state.identity_front_image}/>
+                                <Card title="身份证正面照片"
+                                cover={<img alt="" src={this.state.identity_front_image}/>}
+                                >
                                 </Card>
                             </Col>
                             <Col span={6}>
-                                <Card title="身份证反面照片">
-                                    <img alt="" src={this.state.identity_front_image}/>
+                                <Card title="身份证反面照片"
+                                cover={<img alt="" src={this.state.identity_front_image}/>}
+                                >
                                 </Card>
                             </Col>
                             <Col span={6}>
-                                <Card title="手持身份证照片">
-                                    <img alt="" src={this.state.identity_front_image}/>
+                                <Card title="手持身份证照片"
+                                cover={<img alt="" src={this.state.identity_front_image}/>}>
+                                    
                                 </Card>
                             </Col>
                         </Row>
