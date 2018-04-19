@@ -103,11 +103,13 @@ class QuotedTable extends Component {
             editVisable: false
         });
         this.fetchData({page:1});
-        this.initCurrentRate();
+        this.getOutRate();
+        this.getOutRate();
     };
     componentDidMount(){
         // console.log("did mount 中当前的页："+this.state.pagination.current);
-        this.initCurrentRate();
+        this.getOutRate();
+        this.getInRate();
         this.fetchData({page:1});
     };
     render() {
@@ -162,7 +164,18 @@ class QuotedTable extends Component {
         return (
             <div className="quoted">
                 <div>
-                    入金：{this.state.inRate}
+                    <Row gutter={16}>
+                        <Col span={8}>
+                            <Card title="入金外汇牌价" style={{ width: 300 }}>
+                                $1=¥{this.state.inRate}
+                            </Card>
+                        </Col>
+                        <Col span={8}>
+                            <Card title="出金外汇牌价" style={{ width: 300 }}>
+                                $1=¥{this.state.outRate}
+                            </Card>
+                        </Col>
+                    </Row>
                 </div>
                 <div style={{marginBottom:"10px",overflow:"hidden"}}>
                     <Button onClick={this.handleEdit.bind(this)} type="primary" style={{float:"right"}} icon="plus">新增牌价</Button>
