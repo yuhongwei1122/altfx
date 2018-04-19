@@ -129,6 +129,7 @@ class BonusTable extends Component {
                     agent_unique_code: row.agent_unique_code
                 })).then((res) => {
                     if(Number(res.error.returnCode) === 0){
+                        this.fetchData({page:1});
                         message.success("奖金发放成功～");
                     }else{
                         message.error("奖金发放失败！");
