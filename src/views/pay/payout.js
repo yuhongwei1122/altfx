@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button, notification,message } from 'antd';
+import { Table, Button, notification, message, Spin } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import DateFormate from '../../components/tool/DateFormatPan';
@@ -15,6 +15,7 @@ class PayoutTable extends Component {
         super(props);
         this.state = {
             tableData: [],
+            globalLoading: false,
             pagination: {
                 showTotal: (total) => `共 ${total} 条记录`,
                 pageSize: 10,
@@ -35,6 +36,11 @@ class PayoutTable extends Component {
             secondVisable: false,
             bankvisable: false
         }
+    };
+    toggleLoading = () => {
+        this.setState({
+            globalLoading: !this.state.globalLoading,
+        });
     };
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
@@ -248,9 +254,13 @@ class PayoutTable extends Component {
     handleSearch = (params) => {
         this.fetchData({page:1,...params});
     };
+    componentWillMount(){
+        this.toggleLoading();
+        this.fetchData({page:1});
+    };
     componentDidMount(){
         // console.log("did mount 中当前的页："+this.state.pagination.current);
-        this.fetchData({page:1});
+        this.toggleLoading();
     };
     render() {
         const columns = [
@@ -366,6 +376,7 @@ class PayoutTable extends Component {
             } 
         ];
         return (
+            <Spin tip="Loading..." spinning={this.state.globalLoading}>            
             <div className="report">
                 <div style={{marginTop:10}}>
                     <OutSearchForm handleSearch={this.handleSearch}/>
@@ -384,6 +395,7 @@ class PayoutTable extends Component {
                 <OutSecondModal modalTitle="复审" secondVisable={this.state.secondVisable} handleSecondOk={this.handleSecondOk} inpay={this.state.data}/>
                 <OutBankInfoModal modalTitle="银行信息" bankVisable={this.state.bankVisable} handleBankOk={this.handleBankOk} inpay={this.state.data}/>
             </div>
+            </Spin>
         );
     }
 };

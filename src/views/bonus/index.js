@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Table, Button, Modal, Tag, Card, Row, Col, message } from 'antd';
+import { Table, Button, Modal, Tag, Card, Row, Col, message,Spin } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import DateFormate from '../../components/tool/DateFormatPan';
@@ -11,6 +11,7 @@ class BonusTable extends Component {
     constructor(props){
         super(props);
         this.state = {
+            globalLoading: false,
             tableData: [],
             pagination: {
                 showTotal: (total) => `共 ${total} 条记录`,
@@ -24,6 +25,11 @@ class BonusTable extends Component {
             total_count: "",
             total_users: ""
         }
+    };
+    toggleLoading = () => {
+        this.setState({
+            globalLoading: !this.state.globalLoading,
+        });
     };
     fetchTotal = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
@@ -131,9 +137,13 @@ class BonusTable extends Component {
             }
         });
     };
-    componentDidMount(){
-        console.log("did mount 中当前的页："+this.state.pagination.current);
+    componentWillMount(){
+        this.toggleLoading();
         this.fetchData({page:1});
+    };
+    componentDidMount(){
+        // console.log("did mount 中当前的页："+this.state.pagination.current);
+        this.toggleLoading();
     };
     render() {
         const columns = [
@@ -212,6 +222,7 @@ class BonusTable extends Component {
             }
         ];
         return (
+            <Spin tip="Loading..." spinning={this.state.globalLoading}>
             <div className="report">
                 <div>
                     <Row gutter={24}>
@@ -248,6 +259,7 @@ class BonusTable extends Component {
                         scroll={{ x: 1170,y: 240 }} />
                 </div>
             </div>
+            </Spin>
         );
     }
 };

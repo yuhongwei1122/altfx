@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button, Tag, notification, Select, message } from 'antd';
+import { Table, Button, Tag, notification, Select, message, Spin } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import DateFormate from '../../components/tool/DateFormatPan';
@@ -12,6 +12,7 @@ class SameAccountTable extends Component {
     constructor(props){
         super(props);
         this.state = {
+            globalLoading: false,
             tableData: [],
             pagination: {
                 showTotal: (total) => `共 ${total} 条记录`,
@@ -25,6 +26,11 @@ class SameAccountTable extends Component {
             rejectId:"",
             successVisable: false
         }
+    };
+    toggleLoading = () => {
+        this.setState({
+            globalLoading: !this.state.globalLoading,
+        });
     };
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
@@ -131,9 +137,13 @@ class SameAccountTable extends Component {
             });
         }
     };
+    componentWillMount(){
+        this.toggleLoading();
+        this.fetchData({page:1});
+    };
     componentDidMount(){
         // console.log("did mount 中当前的页："+this.state.pagination.current);
-        this.fetchData({page:1});
+        this.toggleLoading();
     };
     render() {
         const columns = [
@@ -226,6 +236,7 @@ class SameAccountTable extends Component {
             }
         ];
         return (
+            <Spin tip="Loading..." spinning={this.state.globalLoading}>            
             <div className="overview">
                 <div style={{marginBottom:"10px",overflow:"hidden"}}>
                     <label>审核状态：</label>  
@@ -248,6 +259,7 @@ class SameAccountTable extends Component {
                 <RejectModal modalTitle="拒绝" rejectVisable={this.state.rejectVisable} handleRejectOk={this.handleRejectOk}/>                
                 <SuccessModal modalTitle="审核" successVisable={this.state.successVisable} handleSuccessOk={this.handleSuccessOk} type="1"/>                
             </div>
+            </Spin>
         );
     }
 };

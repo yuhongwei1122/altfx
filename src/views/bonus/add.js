@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button, Input, message} from 'antd';
+import { Table, Button, Input, message, Spin} from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import AddForm from './addForm';
@@ -9,6 +9,7 @@ class AddBounsTable extends Component {
     constructor(props){
         super(props);
         this.state = {
+            globalLoading: false,
             tableData: [],
             pagination: {
                 showTotal: (total) => `共 ${total} 条记录`,
@@ -21,6 +22,11 @@ class AddBounsTable extends Component {
             addVisable: false,
             bonus:{}
         }
+    };
+    toggleLoading = () => {
+        this.setState({
+            globalLoading: !this.state.globalLoading,
+        });
     };
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
@@ -72,9 +78,13 @@ class AddBounsTable extends Component {
             bonus: {}
         });
     };
-    componentDidMount(){
-        console.log("did mount 中当前的页："+this.state.pagination.current);
+    componentWillMount(){
+        this.toggleLoading();
         this.fetchData({page:1});
+    };
+    componentDidMount(){
+        // console.log("did mount 中当前的页："+this.state.pagination.current);
+        this.toggleLoading();
     };
     render() {
         const columns = [
@@ -118,6 +128,7 @@ class AddBounsTable extends Component {
             }
         ];
         return (
+            <Spin tip="Loading..." spinning={this.state.globalLoading}>            
             <div className="quoted">
                 <div style={{width:"300px"}}>
                     <Search placeholder="请输入要搜索的代理账户ID" enterButton="搜索" onSearch={value => {this.fetchData({page:1,agent_unique_code:value})}}/>
@@ -132,6 +143,7 @@ class AddBounsTable extends Component {
                 </div>
                 <AddForm addVisable={this.state.addVisable} handleEditOk={this.handleEditOk} handleEditCancel={this.handleEditCancel} bonus={this.state.bonus}/>
             </div>
+            </Spin>
         );
     }
 };

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Card, Row, Col, message } from 'antd';
+import { Table, Card, Row, Col, message, Spin } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import DateFormate from '../../components/tool/DateFormatPan';
@@ -10,6 +10,7 @@ class ReportTable extends Component {
     constructor(props){
         super(props);
         this.state = {
+            globalLoading: false,
             tableData: [],
             pagination: {
                 showTotal: (total) => `共 ${total} 条记录`,
@@ -22,6 +23,11 @@ class ReportTable extends Component {
             total_commission: "",
             total_volume: ""
         }
+    };
+    toggleLoading = () => {
+        this.setState({
+            globalLoading: !this.state.globalLoading,
+        });
     };
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
@@ -64,9 +70,13 @@ class ReportTable extends Component {
             page:this.state.pagination.current
         });
     };
+    componentWillMount(){
+        this.toggleLoading();
+        this.fetchData({page:1});
+    };
     componentDidMount(){
         // console.log("did mount 中当前的页："+this.state.pagination.current);
-        this.fetchData({page:1});
+        this.toggleLoading();
     };
     render() {
         const columns = [
@@ -122,6 +132,7 @@ class ReportTable extends Component {
             } 
         ];
         return (
+            <Spin tip="Loading..." spinning={this.state.globalLoading}>            
             <div className="report">
                 <div>
                     <Row gutter={16}>
@@ -149,6 +160,7 @@ class ReportTable extends Component {
                         onChange={this.handleChange}/>
                 </div>
             </div>
+            </Spin>
         );
     }
 };

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button, Modal, notification, Select,message } from 'antd';
+import { Table, Button, Modal, notification, Select, message, Spin } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import RejectModal from '../register/reject'
@@ -10,6 +10,7 @@ class PointTypeTable extends Component {
     constructor(props){
         super(props);
         this.state = {
+            globalLoading: false,
             tableData: [],
             pagination: {
                 showTotal: (total) => `共 ${total} 条记录`,
@@ -26,6 +27,11 @@ class PointTypeTable extends Component {
             checkMT4: "",
             checkType: ""
         }
+    };
+    toggleLoading = () => {
+        this.setState({
+            globalLoading: !this.state.globalLoading,
+        });
     };
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
@@ -139,9 +145,13 @@ class PointTypeTable extends Component {
             confirmLoading:false
         });
     };
+    componentWillMount(){
+        this.toggleLoading();
+        this.fetchData({page:1});
+    };
     componentDidMount(){
         // console.log("did mount 中当前的页："+this.state.pagination.current);
-        this.fetchData({page:1});
+        this.toggleLoading();
     };
     render() {
         const columns = [
@@ -214,6 +224,7 @@ class PointTypeTable extends Component {
             }
         ];
         return (
+            <Spin tip="Loading..." spinning={this.state.globalLoading}>            
             <div className="overview">
                 <div style={{marginBottom:"10px",overflow:"hidden"}}>
                     <label>审核状态：</label>  
@@ -246,6 +257,7 @@ class PointTypeTable extends Component {
                     <p>您是否确定已经将MT4账户{this.state.checkMT4}的账户类型修改为{this.state.checkType}？</p>
                 </Modal>
             </div>
+            </Spin>
         );
     }
 };

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button, Modal, Tag, Card, Row, Col, notification, message } from 'antd';
+import { Table, Button, Modal, Tag, Card, Row, Col, notification, message, Spin } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import DateFormate from '../../components/tool/DateFormatPan';
@@ -9,6 +9,7 @@ class TransferTable extends Component {
     constructor(props){
         super(props);
         this.state = {
+            globalLoading: false,
             tableData: [],
             pagination: {
                 showTotal: (total) => `共 ${total} 条记录`,
@@ -19,6 +20,11 @@ class TransferTable extends Component {
                 pageSizeOptions:['10', '20', '30', '40', '50', '100']
             }
         }
+    };
+    toggleLoading = () => {
+        this.setState({
+            globalLoading: !this.state.globalLoading,
+        });
     };
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
@@ -45,9 +51,13 @@ class TransferTable extends Component {
             }
         });
     };
+    componentWillMount(){
+        this.toggleLoading();
+        this.fetchData({page:1});
+    };
     componentDidMount(){
         // console.log("did mount 中当前的页："+this.state.pagination.current);
-        this.fetchData({page:1});
+        this.toggleLoading();
     };
     render() {
         const columns = [
@@ -156,8 +166,8 @@ class TransferTable extends Component {
             } 
         ];
         return (
+            <Spin tip="Loading..." spinning={this.state.globalLoading}>            
             <div className="report">
-                
                 <div style={{marginTop:10}}>
                     <Table 
                         rowKey={record => record.id}
@@ -167,8 +177,8 @@ class TransferTable extends Component {
                         onChange={this.handleChange}
                         scroll={{ x: 1370,y: 540 }} />
                 </div>
-               
             </div>
+            </Spin>
         );
     }
 };

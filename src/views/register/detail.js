@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tabs, Row, Col, List, Card, Divider, Icon, Button, message } from 'antd';
+import { Tabs, Row, Col, List, Card, Divider, Icon, Button, message, Spin } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import RejectModal from './reject';
@@ -11,6 +11,7 @@ export default class Detail extends Component{
     constructor(props){
         super();
         this.state = {
+            globalLoading: false,
             detail: {},
             rejectVisable: false,
             successVisable: false,
@@ -19,6 +20,11 @@ export default class Detail extends Component{
             identity_back_image: "",
             risk_tips_image: ""
         };
+    };
+    toggleLoading = () => {
+        this.setState({
+            globalLoading: !this.state.globalLoading,
+        });
     };
     getRowItems = (colums,detail) => {
         return colums.map((item)=>{
@@ -176,7 +182,8 @@ export default class Detail extends Component{
             console.log(acct);
         }));
     };
-    componentDidMount(){
+    componentWillMount(){
+        this.toggleLoading();
         axios.post('/api/register/user-detail',qs.stringify({
             user_id: this.props.match.params.user_id || ""
         })).then((res) => {
@@ -194,6 +201,10 @@ export default class Detail extends Component{
                 });
             }
         });
+    };
+    componentDidMount(){
+        // console.log("did mount 中当前的页："+this.state.pagination.current);
+        this.toggleLoading();
     };
     render(){
         const colums = [
@@ -264,6 +275,7 @@ export default class Detail extends Component{
         ];
         const { detail } = this.state;
         return(
+            <Spin tip="Loading..." spinning={this.state.globalLoading}>            
             <div style={{marginBottom:20}}>
                 <Tabs tabPosition="top">
                     <TabPane tab="基本信息" key="1">
@@ -311,6 +323,7 @@ export default class Detail extends Component{
                 <RejectModal modalTitle="拒绝" rejectVisable={this.state.rejectVisable} handleRejectOk={this.handleRejectOk}/>
                 <SuccessModal modalTitle="审核" successVisable={this.state.successVisable} handleSuccessOk={this.handleSuccessOk} type={detail.account_type}/>
             </div>
+            </Spin>
         )
     }
 };

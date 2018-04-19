@@ -9,7 +9,7 @@ class editForm extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            loading: false,
+            globalLoading: false,
             unique_code: "",
             parent_code: "",
             data: [
@@ -26,15 +26,21 @@ class editForm extends PureComponent {
             ]
         }
     };
+    toggleLoading = () => {
+        this.setState({
+            globalLoading: !this.state.globalLoading,
+        });
+    };
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
           if (!err) {
             values.agent_code = this.state.unique_code;
             values.parent_code = this.state.parent_code;
-            this.setState({loading: true});
+            this.toggleLoading();
             axios.post('/api/validate/change-agent-commission',qs.stringify(values)
             ).then((res) => {
+                this.toggleLoading();
                 if(Number(res.error.returnCode) === 0){
                     this.props.history.push("/commission/list");
                 }else{
@@ -80,13 +86,17 @@ class editForm extends PureComponent {
             console.log(this.state.data);
         });
     }
-
-    componentDidMount(){
+    componentWillMount(){
+        this.toggleLoading();
         this.setState({
             unique_code: this.props.match.params.unique_code || "",
             parent_code: this.props.match.params.parent_code || ""
         });
         this.getCommission();
+    };
+    componentDidMount(){
+        // console.log("did mount 中当前的页："+this.state.pagination.current);
+        this.toggleLoading();
     };
     
     render() {
@@ -573,7 +583,7 @@ class editForm extends PureComponent {
         const { getFieldDecorator } = this.props.form;
 
         return (
-            <Spin spinning={this.state.loading}>
+            <Spin spinning={this.state.globalLoading}>
                 <div className="commission_edit">
                     <Row gutter={16}>
                         <Col span={8}>

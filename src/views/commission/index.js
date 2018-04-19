@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Table, Button, Input, Tag, Row, Col,message } from 'antd';
+import { Table, Button, Input, Tag, Row, Col,message, Spin } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import DateFormate from '../../components/tool/DateFormatPan';
@@ -10,6 +10,7 @@ class CommissionTable extends Component {
     constructor(props){
         super(props);
         this.state = {
+            globalLoading: false,
             tableData: [],
             pagination: {
                 showTotal: (total) => `共 ${total} 条记录`,
@@ -20,6 +21,11 @@ class CommissionTable extends Component {
                 pageSizeOptions:['10', '20', '30', '40', '50', '100']
             }
         }
+    };
+    toggleLoading = () => {
+        this.setState({
+            globalLoading: !this.state.globalLoading,
+        });
     };
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
@@ -52,9 +58,13 @@ class CommissionTable extends Component {
             page:this.state.pagination.current
         });
     };
+    componentWillMount(){
+        this.toggleLoading();
+        this.fetchData({page:1});
+    };
     componentDidMount(){
         // console.log("did mount 中当前的页："+this.state.pagination.current);
-        this.fetchData({page:1});
+        this.toggleLoading();
     };
     render() {
         const columns = [
@@ -96,6 +106,7 @@ class CommissionTable extends Component {
             }
         ];
         return (
+            <Spin tip="Loading..." spinning={this.state.globalLoading}>            
             <div className="quoted">
                 <div style={{width:"300px"}}>
                     <Search placeholder="请输入要搜索的账户ID" enterButton="搜索" onSearch={value => {this.fetchData({page:1,unique_code:value})}}/>
@@ -109,6 +120,7 @@ class CommissionTable extends Component {
                         onChange={this.handleChange}/>
                 </div>
             </div>
+            </Spin>
         );
     }
 };

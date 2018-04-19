@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Table, Button, Modal, Tag, notification, message } from 'antd';
+import { Table, Button, Modal, Tag, notification, message, Spin } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import DeleteModel from '../../components/tool/deleteCommonModel';
@@ -12,6 +12,7 @@ class RegisterTable extends Component {
     constructor(props){
         super(props);
         this.state = {
+            globalLoading: false,
             tableData: [],
             pagination: {
                 showTotal: (total) => `共 ${total} 条记录`,
@@ -23,6 +24,11 @@ class RegisterTable extends Component {
             },
             sendMailText:"您确认重新给用户发送激活邮件吗？"
         }
+    };
+    toggleLoading = () => {
+        this.setState({
+            globalLoading: !this.state.globalLoading,
+        });
     };
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
@@ -86,9 +92,13 @@ class RegisterTable extends Component {
             }
         });
     };
+    componentWillMount(){
+        this.toggleLoading();
+        this.fetchData({page:1});
+    };
     componentDidMount(){
         // console.log("did mount 中当前的页："+this.state.pagination.current);
-        this.fetchData({page:1});
+        this.toggleLoading();
     };
     render() {
         const columns = [
@@ -199,6 +209,7 @@ class RegisterTable extends Component {
             }
         ];
         return (
+            <Spin tip="Loading..." spinning={this.state.globalLoading}>            
             <div className="overview">
                 <div style={{marginTop:10}}>
                     <SearchForm handleSearch={this.handleSearch}/>
@@ -211,6 +222,7 @@ class RegisterTable extends Component {
                         scroll={{ x: 1170,y: 240 }} />
                 </div>
             </div>
+            </Spin>
         );
     }
 };

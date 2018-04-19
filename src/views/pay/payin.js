@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button, Notification, message } from 'antd';
+import { Table, Button, Notification, message, Spin } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import DateFormate from '../../components/tool/DateFormatPan';
@@ -13,6 +13,7 @@ class PayinTable extends Component {
     constructor(props){
         super(props);
         this.state = {
+            globalLoading: false,
             tableData: [],
             pagination: {
                 showTotal: (total) => `共 ${total} 条记录`,
@@ -33,6 +34,11 @@ class PayinTable extends Component {
             firstVisable: false,
             secondVisable: false
         }
+    };
+    toggleLoading = () => {
+        this.setState({
+            globalLoading: !this.state.globalLoading,
+        });
     };
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
@@ -229,9 +235,13 @@ class PayinTable extends Component {
     handleSearch = (params) => {
         this.fetchData({page:1,...params});
     };
+    componentWillMount(){
+        this.toggleLoading();
+        this.fetchData({page:1});
+    };
     componentDidMount(){
         // console.log("did mount 中当前的页："+this.state.pagination.current);
-        this.fetchData({page:1});
+        this.toggleLoading();
     };
     render() {
         const columns = [
@@ -352,6 +362,7 @@ class PayinTable extends Component {
             } 
         ];
         return (
+            <Spin tip="Loading..." spinning={this.state.globalLoading}>            
             <div className="report">
                 <div style={{marginTop:10}}>
                     <SearchForm handleSearch={this.handleSearch}/>
@@ -368,8 +379,8 @@ class PayinTable extends Component {
                 <RejectModal modalTitle="拒绝" rejectVisable={this.state.rejectVisable} handleRejectOk={this.handleRejectOk} inpay={this.state.data}/>
                 <FirstModal modalTitle="初审" firstVisable={this.state.firstVisable} handleFirstOk={this.handleFirstOk} inpay={this.state.data}/>
                 <SecondModal modalTitle="复审" secondVisable={this.state.secondVisable} handleSecondOk={this.handleSecondOk} inpay={this.state.data}/>
-                
             </div>
+            </Spin>
         );
     }
 };
