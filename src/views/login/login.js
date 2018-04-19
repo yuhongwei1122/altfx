@@ -65,7 +65,10 @@ class LoginForm extends Component {
         return (
             <div className="main">
                 <div className="altfx-login">
-                    <div style={{textAlign:"center",marginBottom:35}}><img src={Logo} style={{marginBottom:20,height:60}} alt="logo"/></div>
+                    <div style={{textAlign:"center",marginLeft:-25}}><img src={Logo} style={{marginBottom:20,height:60}} alt="logo"/></div>
+                    <div style={{textAlign:"center",marginBottom:35,fontSize:18}}>
+                        ALTFX后台管理系统
+                    </div>
                     {this.state.error?<Alert style={{marginBottom:24}} message={this.state.error} type="error" showIcon />:null}
                     <div> 
                         <Form onSubmit={this.handleSubmit} className="login-form">
