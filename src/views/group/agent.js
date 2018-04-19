@@ -134,7 +134,7 @@ class GroupCrmTable extends Component {
                     <SearchForm handleSearch={this.handleSearch} labelText="被转组代理ID"/>
                 </div>
                 <div style={{marginTop:10}}>
-                    <Link to={{pathname:"/group/change/2"}}><Button type="primary">新增转组</Button></Link>
+                    <Link to={{pathname:"/group/change/2"}}><Button type="primary" icon="plus">新增转组</Button></Link>
                 </div>
                 <div style={{marginTop:10}}>
                     <Table 

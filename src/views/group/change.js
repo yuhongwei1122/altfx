@@ -174,7 +174,7 @@ class ChangeGroupForm extends Component {
                                 pattern: /^(\d)+$/,message:"ID必须全是数字"
                             }]
                         })(
-                            <Input placeholder="请输入新转入代理ID" onBlur={this.handleCheck.bind(this,2)}/>
+                            <Input placeholder="请输入新转入代理ID"/>
                         )}
                         <Button onClick={this.handleCheckTo.bind(this,2)} type="primary">校验</Button>
                     </FormItem>
@@ -192,7 +192,7 @@ class ChangeGroupForm extends Component {
                     <FormItem {...tailFormItemLayout}>
                         {
                             Number(this.state.type) === 1 ? 
-                            <Link to="/gourp/crm"><Button type="primary">取消</Button></Link> :
+                            <Link to="/gourp/crm"><Button style={{marginRight:40}}>取消</Button></Link> :
                             <Link to="/gourp/agent"><Button type="primary">取消</Button></Link>
                         }
                         
