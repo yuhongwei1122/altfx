@@ -189,6 +189,12 @@ class ChangeGroupForm extends Component {
                         <p>点击提交按钮后，将立即转组，若客户现在还存在交易，则该笔交易将返佣给转组后的代理。</p>
                     </FormItem>
                     <FormItem {...tailFormItemLayout}>
+                        {
+                            Number(this.state.type) === 1 ? 
+                            <Link to="/gourp/crm"><Button type="primary">取消</Button></Link> :
+                            <Link to="/gourp/agent"><Button type="primary">取消</Button></Link>
+                        }
+                        
                         <Button type="primary" htmlType="submit">确认转组</Button>
                     </FormItem>
                 </Form>
