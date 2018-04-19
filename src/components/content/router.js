@@ -101,4 +101,23 @@ export default [
         private: true,
         component: () => import('../../views/pay/transfer')
     },
+    {
+        path: '/group/agent',
+        name: '代理转组',
+        private: true,
+        component: () => import('../../views/group/agent')
+    },
+    {
+        path: '/group/crm',
+        name: '代理转组',
+        private: true,
+        component: () => import('../../views/group/crm')
+    },
+    {
+        path: '/group/change/:type',
+        name: '转组表单',
+        private: true,
+        component: () => import('../../views/group/change')
+    },
 ]
+

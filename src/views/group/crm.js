@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Table, Button, Input, message, Spin } from 'antd';
+import { Table, Button, message, Spin } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import DateFormate from '../../components/tool/DateFormatPan';
-const Search = Input.Search;
+import SearchForm from './search';
 
-class CommissionTable extends Component {
+class GroupCrmTable extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -29,7 +29,9 @@ class CommissionTable extends Component {
     };
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
-        axios.post('/api/member/all-agent',qs.stringify({
+        // console.log(params);
+        axios.post('/api/trgroup/record',qs.stringify({
+            type: 1,
             size: this.state.pagination.pageSize,  //每页数据条数
             ...params
         })).then((res) => {
@@ -41,16 +43,25 @@ class CommissionTable extends Component {
                         total : Number(res.data.result_count),
                         ...pager
                     },
-                    tableData : res.data.result
+                    tableData : res.data.result,
+                    total_volume:res.data.total_volume,
+                    total_commission:res.data.total_commission
                 });
             }else{
                 message.error(res.error.returnUserMessage);
             }
         });
     };
+    handleSearch = (params)=>{
+        this.fetchData({
+            page:1,
+            ...params
+        });
+    }
     handleChange = (pagination, filters, sorter) => {
         // console.log(filters);
         // const type = {type: filters['type'].join("") || ''};
+        
         this.setState({
             pagination : Object.assign(this.state.pagination, pagination)
         });
@@ -69,47 +80,56 @@ class CommissionTable extends Component {
     render() {
         const columns = [
             {
-                title: '账户ID',
-                dataIndex: 'unique_code',
-                key: 'unique_code'
+                title: '被转组客户ID',
+                dataIndex: 'from_unique_code',
+                key: 'from_unique_code'
             },
             {
-                title: 'CRM账户名',
-                dataIndex: 'account',
-                key: 'account'
+                title: '转组前上级ID',
+                dataIndex: 'parent_unique_code',
+                key: 'parent_unique_code'
             },
             {
-                title: '用户名',
-                dataIndex: 'username',
-                key: 'username'
+                title: '转组后上级ID',
+                dataIndex: 'to_unique_code',
+                key: 'to_unique_code'
             },
             {
-                title: '上级代理ID',
-                dataIndex: 'parent_code',
-                key: 'parent_code'
-            }, 
-            {
-                title: '注册时间',
-                dataIndex: 'regist_date',
-                key: 'regist_date',
+                title: '转组时间',
+                dataIndex: 'create_time',
+                key: 'create_time',
                 render:(text) => {
                     return <DateFormate date={text} format="yyyy-MM-dd hh:mm:ss"/>;
                 }
             },
             {
-                title: '操作',
-                dataIndex: '', 
-                key: 'x', 
-                render: (text, row, index) => (
-                    <Link to={{pathname:'/commission/edit/'+row.unique_code+'/'+row.parent_code}}><Button style={{lineHeight:0}} title="设置" type={Number(row.has_set_commission)===1?"primary":"danger"} size="small" icon="edit">设置反佣</Button></Link>
-                )
-            }
+                title: '状态',
+                dataIndex: 'status',
+                key: 'status',
+                render: (text) => {
+                    if(Number(text) === 0){
+                        return "初始";
+                    }else if(Number(text) === 1){
+                        return "成功";
+                    }else{
+                        return "失败";
+                    }
+                }
+            },
+            {
+                title: '操作人',
+                dataIndex: 'operator',
+                key: 'operator'
+            } 
         ];
         return (
             <Spin tip="Loading..." spinning={this.state.globalLoading}>            
-            <div className="quoted">
-                <div style={{width:"300px"}}>
-                    <Search placeholder="请输入要搜索的账户ID" enterButton="搜索" onSearch={value => {this.fetchData({page:1,unique_code:value})}}/>
+            <div className="report">
+                <div style={{marginTop:10}}>
+                    <SearchForm handleSearch={this.handleSearch} labelText="被转组客户ID"/>
+                </div>
+                <div style={{marginTop:10}}>
+                    <Link to={{pathname:"/group/change/1"}}><Button type="primary">新增转组</Button></Link>
                 </div>
                 <div style={{marginTop:10}}>
                     <Table 
@@ -124,4 +144,4 @@ class CommissionTable extends Component {
         );
     }
 };
-export default CommissionTable;
+export default GroupCrmTable;

@@ -134,5 +134,17 @@ app.post('/api/bonus/cancel',(req, res) => {
 app.post('/api/bonus/confirm',(req, res) => {
     res.send(require('./data/common/ok.json'));
 });
+//客户转组列表
+app.post('/api/trgroup/record',(req, res) => {
+    res.send(require('./data/group/record.json'));
+});
+//转租
+app.post('/api/trgroup/apply',(req, res) => {
+    res.send(require('./data/common/ok.json'));
+});
+//校验转组信息
+app.post('/api/trgroup/check',(req, res) => {
+    res.send(require('./data/group/check.json'));
+});
 app.listen(port, () => {console.log(`Lisening mockServer on port ${port}`)});
 

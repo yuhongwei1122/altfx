@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Table, Button, Modal, Tag, notification, message, Spin } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
-import DeleteModel from '../../components/tool/deleteCommonModel';
 import DateFormate from '../../components/tool/DateFormatPan';
 import SearchForm from './search';
 const ButtonGroup = Button.Group;
@@ -68,7 +67,7 @@ class RegisterTable extends Component {
     };
     //重新发送邮件
     handleSendMail = (id) => {
-        const sendModal = Modal.confirm({
+        Modal.confirm({
             title: '发送邮件',
             content: "您确认重新给用户发送激活邮件？",
             okText: '确认',
@@ -201,9 +200,9 @@ class RegisterTable extends Component {
                 fixed:"right",
                 render: (text, row, index) => (
                     <ButtonGroup> 
-                        <Link to={{pathname:"/register/detail/"+row.id}}><Button style={{lineHeight:0}} disabled={row.status != 2} title="审核" type="primary" size="small" icon="edit"></Button></Link>
+                        <Link to={{pathname:"/register/detail/"+row.id}}><Button style={{lineHeight:0}} disabled={Number(row.status) !== 2} title="审核" type="primary" size="small" icon="edit"></Button></Link>
                         <Link to={{pathname:"/register/detail/"+row.id}}><Button style={{lineHeight:0}} title="详情" type="primary" size="small" icon="eye"></Button></Link>
-                        <Button style={{lineHeight:0}} disabled={row.status != 1} onClick={this.handleSendMail.bind(this,row.id)} title="重新发送验证邮件" type="primary" size="small" icon="reload"></Button>
+                        <Button style={{lineHeight:0}} disabled={Number(row.status) !== 1} onClick={this.handleSendMail.bind(this,row.id)} title="重新发送验证邮件" type="primary" size="small" icon="reload"></Button>
                     </ButtonGroup>
                 )
             }

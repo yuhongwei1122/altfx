@@ -115,6 +115,29 @@ const menuData = [
             }
         ]
     },
+    {
+        key: 'group',
+        name: '转组管理',
+        path: '/group',
+        icon: 'pushpin-o',
+        role:["admin_tina"],
+        children: [
+            {
+                key: 'crmchange',
+                name: 'CRM转组',
+                path: '/group/crm',
+                icon: 'hourglass',
+                role:["admin_tina"]
+            },
+            {
+                key: 'agengtchange',
+                name: '代理转组',
+                path: '/group/agent',
+                icon: 'api',
+                role:["admin_tina"]
+            },
+        ]
+    }
 ]
 
 export default menuData;

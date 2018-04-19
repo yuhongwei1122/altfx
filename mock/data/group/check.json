@@ -1,0 +1,17 @@
+{
+    "error":{
+        "returnCode" : 0,
+        "returnMessage" : "用户名已被使用",
+        "returnUserMessage" : "用户名已被使用"
+    },
+    "data" : {
+        "from_unique_code": "98902432",
+        "from_username": "张晓红",
+        "parent_unique_code": "69083728",
+        "parent_username": "李晓乐",
+        "balance": "1000",
+        "trading_amount": "100",
+        "to_unique_code": "98902432",
+        "to_username": "张晓红"
+    }
+}
