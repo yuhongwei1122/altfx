@@ -219,7 +219,7 @@ class RegisterTable extends Component {
                         dataSource={this.state.tableData} 
                         pagination={this.state.pagination} 
                         onChange={this.handleChange}
-                        scroll={{ x: 1170,y: 240 }} />
+                        scroll={{ x: 1170}} />
                 </div>
             </div>
             </Spin>

@@ -254,7 +254,7 @@ class SameAccountTable extends Component {
                         dataSource={this.state.tableData} 
                         pagination={this.state.pagination} 
                         onChange={this.handleChange}
-                        scroll={{ x: 1170,y: 240 }} />
+                        scroll={{ x: 1170 }} />
                 </div>
                 <RejectModal modalTitle="拒绝" rejectVisable={this.state.rejectVisable} handleRejectOk={this.handleRejectOk}/>                
                 <SuccessModal modalTitle="审核" successVisable={this.state.successVisable} handleSuccessOk={this.handleSuccessOk} type="1"/>                
