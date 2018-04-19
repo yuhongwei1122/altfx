@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button, Tag, Card, Row, Col, message } from 'antd';
+import { Table, Button, Tag, Card, Row, Col, message, Spin } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 import DateFormate from '../../components/tool/DateFormatPan';
@@ -10,6 +10,7 @@ class QuotedTable extends Component {
     constructor(props){
         super(props);
         this.state = {
+            globalLoading: false,
             tableData: [],
             pagination: {
                 showTotal: (total) => `共 ${total} 条记录`,
@@ -23,6 +24,11 @@ class QuotedTable extends Component {
             outRate: "",
             editVisable: false
         }
+    };
+    toggleLoading = () => {
+        this.setState({
+            globalLoading: !this.state.globalLoading,
+        });
     };
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
@@ -104,13 +110,17 @@ class QuotedTable extends Component {
         });
         this.fetchData({page:1});
         this.getOutRate();
+        // this.getInRate();
+    };
+    componentWillMount(){
+        this.toggleLoading();
         this.getOutRate();
+        // this.getInRate();
+        this.fetchData({page:1});
     };
     componentDidMount(){
         // console.log("did mount 中当前的页："+this.state.pagination.current);
-        this.getOutRate();
-        this.getInRate();
-        this.fetchData({page:1});
+        this.toggleLoading();
     };
     render() {
         const columns = [
@@ -162,6 +172,7 @@ class QuotedTable extends Component {
             }
         ];
         return (
+            <Spin tip="Loading..." spinning={this.state.globalLoading}>
             <div className="quoted">
                 <div>
                     <Row gutter={16}>
@@ -190,6 +201,7 @@ class QuotedTable extends Component {
                 </div>
                 <EditForm editVisable={this.state.editVisable} handleEditOk={this.handleEditOk} handleEditCancel={this.handleEditCancel}/>
             </div>
+            </Spin>
         );
     }
 };

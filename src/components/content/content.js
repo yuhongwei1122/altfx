@@ -41,7 +41,7 @@ class JdbContent extends Component {
     constructor(props){
         super(props);
         this.state = {
-            collapsed: false,
+            collapsed: false
         }
         console.log(this.props.location);
     }
