@@ -70,7 +70,7 @@ class QuotedTable extends Component {
     };
     initCurrentRate = () => {
         console.log("执行了吗");
-        axios.all([this.getOutRate(), this.getInRate(),this.fetchData({page:1})])
+        axios.all([this.getOutRate(), this.getInRate()])
         .then(axios.spread(function (acct, perms) {
             // Both requests are now complete
             console.log(perms);
@@ -102,13 +102,13 @@ class QuotedTable extends Component {
         this.setState({
             editVisable: false
         });
-        // this.fetchData({page:1});
+        this.fetchData({page:1});
         this.initCurrentRate();
     };
     componentDidMount(){
         // console.log("did mount 中当前的页："+this.state.pagination.current);
         this.initCurrentRate();
-        // this.fetchData({page:1});
+        this.fetchData({page:1});
     };
     render() {
         const columns = [
@@ -162,18 +162,7 @@ class QuotedTable extends Component {
         return (
             <div className="quoted">
                 <div>
-                    <Row gutter={16}>
-                        <Col span={8}>
-                            <Card title="入金外汇牌价" style={{ width: 300 }}>
-                                $1=¥{this.state.inRate}
-                            </Card>
-                        </Col>
-                        <Col span={8}>
-                            <Card title="出金外汇牌价" style={{ width: 300 }}>
-                                $1=¥{this.state.outRate}
-                            </Card>
-                        </Col>
-                    </Row>
+                    入金：{this.state.inRate}
                 </div>
                 <div style={{marginBottom:"10px",overflow:"hidden"}}>
                     <Button onClick={this.handleEdit.bind(this)} type="primary" style={{float:"right"}} icon="plus">新增牌价</Button>
