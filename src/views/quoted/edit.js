@@ -24,6 +24,7 @@ class editForm extends PureComponent {
                     this.setState({loading: false});
                     this.props.handleEditOk();
                 }else{
+                    this.setState({loading: false});
                     message.error(res.error.returnUserMessage);
                 }
             });

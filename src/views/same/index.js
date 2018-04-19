@@ -23,7 +23,7 @@ class SameAccountTable extends Component {
                 pageSizeOptions:['10', '20', '30', '40', '50', '100']
             },
             rejectVisable: false,
-            rejectId:"",
+            login_id:"",
             successVisable: false
         }
     };
@@ -71,7 +71,7 @@ class SameAccountTable extends Component {
     };
     handleReject = (id) => {
         this.setState({
-            rejectId: id,
+            login_id: id,
             rejectVisable: true
         });
     };
@@ -89,7 +89,7 @@ class SameAccountTable extends Component {
                         duration: 2.5
                     });
                     this.setState({
-                        rejectId:"",
+                        login_id:"",
                         rejectVisable: false
                     });
                 }else{
@@ -98,14 +98,14 @@ class SameAccountTable extends Component {
             });
         }else{
             this.setState({
-                rejectId:"",
+                login_id:"",
                 rejectVisable: false
             });
         }
     };
     handleSuccess = (id) => {
         this.setState({
-            rejectId: id,
+            login_id: id,
             successVisable: true
         });
     };
@@ -113,7 +113,8 @@ class SameAccountTable extends Component {
         console.log(params);
         if(params){
             axios.post('/api/user/mt4-audit',qs.stringify({
-                user_id: this.state.rejectId,
+                login_id: this.state.login_id,
+                result: 1,
                 ...params
             })).then((res) => {
                 if(Number(res.error.returnCode) === 0){
@@ -123,7 +124,7 @@ class SameAccountTable extends Component {
                         duration: 2.5
                     });
                     this.setState({
-                        rejectId:"",
+                        login_id:"",
                         successVisable: false
                     });
                 }else{
@@ -132,7 +133,7 @@ class SameAccountTable extends Component {
             });
         }else{
             this.setState({
-                rejectId:"",
+                login_id:"",
                 successVisable: false
             });
         }
@@ -229,8 +230,8 @@ class SameAccountTable extends Component {
                 fixed:"right",
                 render: (text, row, index) => (
                     <ButtonGroup> 
-                        <Button style={{lineHeight:0}} onClick={this.handleSuccess.bind(this,row.record_id)} disabled={Number(row.status) !== 1} title="审核" type="primary" size="small" icon="check"></Button>
-                        <Button style={{lineHeight:0}} onClick={this.handleReject.bind(this,row.record_id)} disabled={Number(row.status) !== 1} title="驳回" type="danger" size="small" icon="close"></Button>
+                        <Button style={{lineHeight:0}} onClick={this.handleSuccess.bind(this,row.login_id)} disabled={Number(row.status) !== 1} title="审核" type="primary" size="small" icon="check"></Button>
+                        <Button style={{lineHeight:0}} onClick={this.handleReject.bind(this,row.login_id)} disabled={Number(row.status) !== 1} title="驳回" type="danger" size="small" icon="close"></Button>
                     </ButtonGroup>
                 )
             }

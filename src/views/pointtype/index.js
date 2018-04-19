@@ -94,6 +94,9 @@ class PointTypeTable extends Component {
                         rejectVisable: false
                     });
                 }else{
+                    this.setState({
+                        confirmLoading:false
+                    });
                     message.error(res.error.returnUserMessage);
                 }
             });
@@ -132,6 +135,9 @@ class PointTypeTable extends Component {
                     confirmLoading:false
                 });
             }else{
+                this.setState({
+                    confirmLoading:false
+                });
                 message.error(res.error.returnUserMessage);
             }
         });

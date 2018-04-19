@@ -18,7 +18,12 @@ class addForm extends PureComponent {
           if (!err) {
             //   console.log(values);
             this.setState({loading: true});
-            axios.post('/api/bonus/create',qs.stringify(values
+            axios.post('/api/bonus/create',qs.stringify(
+                {
+                    agent_unique_code: this.props.bonus.agent_unique_code,
+                    login_unique_code: JSON.parse(sessionStorage.getItem("altfx_user")).unique_code,
+                    ...values
+                }
             )).then((res) => {
                 if(Number(res.error.returnCode) === 0){
                     this.setState({loading: false});

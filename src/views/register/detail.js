@@ -265,7 +265,7 @@ export default class Detail extends Component{
                 name: "wechat",
                 typeFlag: true,
                 render: (text) => {
-                    if(text !== undefined){
+                    if(text !== 'undefined'){
                         return text;
                     }else{
                         return "--"
