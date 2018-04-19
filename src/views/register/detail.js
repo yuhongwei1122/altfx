@@ -320,8 +320,8 @@ export default class Detail extends Component{
                 <Divider orientation="left">操作<Icon type="edit"></Icon></Divider>
                 <div style={{marginTop:10,textAlign:"center"}}>
                     <Button onClick={this.handleBack} size="large" icon="left-circle-o">关闭</Button>
-                    {detail.status!==4 ? <Button onClick={this.handleSuccess} icon="check-circle-o" style={{margin:"0px 15px"}} type="primary" size="large">通过</Button> : null}
-                    {detail.status!==4 ? <Button onClick={this.handleReject} icon="close-circle-o" type="danger" size="large">拒绝</Button> : null}
+                    {Number(detail.status)===2 ? <Button onClick={this.handleSuccess} icon="check-circle-o" style={{margin:"0px 15px"}} type="primary" size="large">通过</Button> : null}
+                    {Number(detail.status)===2 ? <Button onClick={this.handleReject} icon="close-circle-o" type="danger" size="large">拒绝</Button> : null}
                 </div>
                 <RejectModal modalTitle="拒绝" rejectVisable={this.state.rejectVisable} handleRejectOk={this.handleRejectOk}/>
                 <SuccessModal modalTitle="审核" successVisable={this.state.successVisable} handleSuccessOk={this.handleSuccessOk} type={detail.account_type}/>
