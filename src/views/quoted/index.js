@@ -58,7 +58,7 @@ class QuotedTable extends Component {
         })).then((res) => {
             if(Number(res.error.returnCode) === 0){
                 this.setState({
-                    inRate : res.data.rate
+                    inRate : res.data.rate.rate
                 });
             }
         });
@@ -69,7 +69,7 @@ class QuotedTable extends Component {
         })).then((res) => {
             if(Number(res.error.returnCode) === 0){
                 this.setState({
-                    outRate : res.data.rate
+                    outRate : res.data.rate.rate
                 });
             }
         });
@@ -110,12 +110,12 @@ class QuotedTable extends Component {
         });
         this.fetchData({page:1});
         this.getOutRate();
-        // this.getInRate();
+        this.getInRate();
     };
     componentWillMount(){
         this.toggleLoading();
         this.getOutRate();
-        // this.getInRate();
+        this.getInRate();
         this.fetchData({page:1});
     };
     componentDidMount(){
