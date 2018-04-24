@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import Loadable from 'react-loadable';
 import {Route, Switch, Redirect} from 'react-router-dom';
 import Async from 'react-code-splitting';
-import { Layout } from 'antd';
+import { Layout, Spin } from 'antd';
 import JdbHeader from '../header/header';
 import JdbFooter from '../footer/footer'
 import JdbSider from '../sider/sider';
@@ -35,7 +36,25 @@ redirects.reverse(redirects);
 console.log(redirects);
 redirects = redirects.concat(routerList.filter(item => {
     return item.type === 'Redirect'
-}))
+}));
+
+const MyLoadingComponent = ({ isLoading, error }) => {
+    // Handle the loading state
+    if (isLoading) {
+        return (
+            <div className="loading-box">
+                <Spin style={{margin: "0 auto"}} tip="亲，正在努力加载中，请稍后..."></Spin>;
+            </div>
+        );
+    }
+    // Handle the error state
+    else if (error) {
+        return <div>Sorry, there was a problem loading the page.</div>;
+    }
+    else {
+        return null;
+    }
+};
 
 class JdbContent extends Component {
     constructor(props){
@@ -73,7 +92,11 @@ class JdbContent extends Component {
                                 let props = {
                                     key: item.path,
                                     path: item.path,
-                                    component: (props)=> <Async componentProps={props} load={item.component()} />
+                                    // component: (props)=> <Async componentProps={props} load={item.component()} />
+                                    component: Loadable({
+                                        loader: () => item.component(),
+                                        loading: MyLoadingComponent
+                                    })
                                 }
 
                                 if(item.private === false) {

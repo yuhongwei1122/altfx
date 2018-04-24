@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Loadable from 'react-loadable';
+import {Spin} from 'antd';
 import {HashRouter, Route, Switch} from 'react-router-dom';
 import axios from 'axios';
 import {message} from 'antd';
 import './index.css';
-import App from './components/content/content';
-import Login from './views/login/login'
 import registerServiceWorker from './registerServiceWorker';
 import moment from 'moment';
 import md5 from 'md5';
@@ -40,7 +40,7 @@ axios.interceptors.request.use(function (config) {
     }
     console.log(config);
     let data = {};
-    if(config.data!=undefined){
+    if(config.data!==undefined){
         let strs = config.data.split("&");
         for (var i = 0; i < strs.length; i++) {
             data[strs[i].split("=")[0]] = (strs[i].split("=")[1]);
@@ -83,11 +83,37 @@ axios.interceptors.request.use(function (config) {
     console.log("报错");
     return Promise.reject(error);
 });
+const MyLoadingComponent = ({ isLoading, error }) => {
+    // Handle the loading state
+    if (isLoading) {
+        return (
+            <div className="loading-box">
+                <Spin style={{margin: "0 auto"}} tip="亲，正在努力加载中，请稍后..."></Spin>;
+            </div>
+        );
+    }
+    // Handle the error state
+    else if (error) {
+        return <div>Sorry, there was a problem loading the page.</div>;
+    }
+    else {
+        return null;
+    }
+};
+const AsyncApp = Loadable({
+    loader: () => import('./components/content/content'),
+    loading: MyLoadingComponent
+});
+
+const AsyncLogin = Loadable({
+    loader: () => import('./views/login/login'),
+    loading: MyLoadingComponent
+});
 ReactDOM.render(
     <HashRouter>
         <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/" name="content" component={App}></Route>
+            <Route path="/login" component={AsyncLogin} />
+            <Route path="/" name="content" component={AsyncApp}></Route>
         </Switch>
     </HashRouter>, 
     document.getElementById('root')
