@@ -105,14 +105,12 @@ class RegisterTable extends Component {
                 title: '用户名',
                 dataIndex: 'account',
                 key: 'account',
-                width:130,
                 fixed:"left",
             },
             {
                 title: '申请时间',
                 dataIndex: 'create_time',
                 key: 'create_time',
-                width:110,
                 render:(text) => {
                     return <DateFormate date={text} format="yyyy-MM-dd hh:mm:ss"/>;
                 }
