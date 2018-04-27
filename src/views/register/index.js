@@ -133,7 +133,8 @@ class RegisterTable extends Component {
             {
                 title: '邮箱',
                 dataIndex: 'mail',
-                key: 'mail'
+                key: 'mail',
+                width: 130
             }, 
             {
                 title: '注册类型',
@@ -218,7 +219,7 @@ class RegisterTable extends Component {
                         dataSource={this.state.tableData} 
                         pagination={this.state.pagination} 
                         onChange={this.handleChange}
-                        scroll={{ x: 1170}} />
+                        scroll={{ x: 1000}} />
                 </div>
             </div>
             </Spin>
