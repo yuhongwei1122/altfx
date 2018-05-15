@@ -58,14 +58,14 @@ class editForm extends Component {
         });
     };
     componentDidMount(){
-        axios.post('/api/user/perms',qs.stringify({
+        axios.post('/api/user/perms_list',qs.stringify({
             limit: 20
         }))
         .then((res) => {
             let list = [];
             let allCheck = [];
-            if(res.data.list.length > 0){
-                res.data.list.forEach((item)=>{
+            if(res.data.result.length > 0){
+                res.data.result.forEach((item)=>{
                     list.push({"label":item.perm_name,"value":item.id});
                     allCheck.push(item.id);
                 });

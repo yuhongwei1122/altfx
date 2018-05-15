@@ -5,7 +5,7 @@
         "returnUserMessage": "OK"
     },
     "data": {
-        "list": [
+        "result": [
             {
                 "id": "1",
                 "perm_name":"超级管理员",
@@ -49,9 +49,6 @@
                 "time_create": "1463465978"
             }
         ],
-        "pagination": {
-            "amount": 21,
-            "page": 1
-        }
+        "result_count": 2
     }
 }

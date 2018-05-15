@@ -58,7 +58,7 @@ class OutSearchForm extends Component{
                     <Col span={10} key="status">
                         <FormItem 
                             {...formItemLayout}
-                            label="入金状态"
+                            label="出金状态"
                         >
                             {getFieldDecorator("status", {
                                 initialValue: "0",

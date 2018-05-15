@@ -14,9 +14,8 @@ export default class DeleteModel extends Component {
             <Modal
                 visible={this.props.visible}
                 title={this.state.title}
-                onOk={this.handleOk}
                 confirmLoading={this.props.confirmLoading}
-                onCancel={this.handleCancel}
+                onCancel={this.props.handleCancel}
                 footer={[
                     <Button key="back" onClick={this.props.handleCancel}>取消</Button>,
                     <Button key="submit" type="primary" onClick={this.props.handleOk}>确认</Button>

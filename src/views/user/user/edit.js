@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
-import { Button, Input, Form, Spin, Radio } from 'antd';
+import { Button, Input, Form, Spin, Checkbox } from 'antd';
 import axios from 'axios';
 import qs from 'qs';
 const FormItem = Form.Item;
 const { TextArea } = Input;
-const RadioGroup = Radio.Group;
+const CheckboxGroup = Checkbox.Group;
 
 class editForm extends PureComponent {
     constructor(props) {
@@ -12,7 +12,11 @@ class editForm extends PureComponent {
         this.state = {
             loading: false,
             roleList: [],
-            role: ""
+            role: "",
+            checkedList: this.props.editData["role"] || [],
+            indeterminate: true,
+            checkAll: false,
+            allCheck: []
         }
     };
     handleSubmit = (e) => {
@@ -20,6 +24,7 @@ class editForm extends PureComponent {
         this.props.form.validateFieldsAndScroll((err, values) => {
           if (!err) {
             //   console.log(values);
+            values.role = this.state.checkedList.length>0?this.state.checkedList:this.props.editData.role;
             this.setState({loading: true});
             if(this.props.editData.id){
                 values.id = this.props.editData.id;
@@ -38,20 +43,39 @@ class editForm extends PureComponent {
           }
         });
     };
+    onChange = (checkedList) => {
+        console.log(checkedList.length);
+        this.setState({
+          checkedList,
+          indeterminate: !!checkedList.length && (checkedList.length < this.state.roleList.length),
+          checkAll: checkedList.length === this.state.roleList.length,
+        });
+    };
+    onCheckAllChange = (e) => {
+        this.setState({
+          checkedList: e.target.checked ? this.state.allCheck : [],
+          indeterminate: false,
+          checkAll: e.target.checked,
+        });
+    };
     componentDidMount(){
         axios.post('/api/user/role',qs.stringify({
             limit: 20
         }))
         .then((res) => {
             let list = [];
-            if(res.data.list.length > 0){
-                res.data.list.forEach((item)=>{
+            let allCheck = [];
+            if(res.data.result.length > 0){
+                res.data.result.forEach((item)=>{
                     list.push({"label":item.role_name,"value":item.id});
+                    allCheck.push(item.id);
                 });
             }
             console.log(list);
             this.setState({
-                roleList: list
+                roleList: list,
+                allCheck: allCheck,
+                checkAll: this.state.checkedList.length === list.length
             });
         });
     };
@@ -129,7 +153,19 @@ class editForm extends PureComponent {
                                 required: true, message: '请选择角色!',
                             }],
                         })(
-                            <RadioGroup options={this.state.roleList} />
+                            <div style={{lineHeight:"20px",marginTop:"10px"}}>
+                                <div style={{ borderBottom: '1px solid #E9E9E9' }}>
+                                <Checkbox
+                                    indeterminate={this.state.indeterminate}
+                                    onChange={this.onCheckAllChange}
+                                    checked={this.state.checkAll}
+                                >
+                                    全部
+                                </Checkbox>
+                                </div>
+                                <br />
+                                <CheckboxGroup options={this.state.roleList} value={this.state.checkedList.length>0?this.state.checkedList:this.props.editData.role} onChange={this.onChange} />
+                            </div>
                         )}
                         </FormItem>
                         <FormItem

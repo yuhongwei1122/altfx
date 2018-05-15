@@ -31,7 +31,7 @@ class PermsTable extends Component {
     fetchData = (params = {}) => {
         // console.log("fetchData中page=："+this.state.pagination.current);
         // console.log(params);
-        axios.post('/api/user/perms',qs.stringify({
+        axios.post('/api/user/perms_list',qs.stringify({
             limit: this.state.pagination.pageSize,  //每页数据条数
             ...params
         })).then((res) => {
@@ -39,7 +39,7 @@ class PermsTable extends Component {
             pager.total = Number(res.data.result_count);
             this.setState({
                 pagination: {
-                    total : res.data.pagination.result_count,
+                    total : res.data.result_count,
                     ...pager
                 },
                 tableData : res.data.result

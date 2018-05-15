@@ -29,7 +29,7 @@ app.post('/api/user/role/update',(req, res) => {
     res.send(require('./data/common/ok.json'));
 });
 //-----权限管理-----
-app.post('/api/user/perms',(req, res) => {
+app.post('/api/user/perms_list',(req, res) => {
     res.send(require('./data/user/perms.json'));
 });
 app.post('/api/user/perms/delete',(req, res) => {
@@ -106,7 +106,7 @@ app.post('/api/user/mt4-audit',(req, res) => {
 });
 //入金/出金审核  cash_type:1|2  1:入金  2:出金
 app.post('/api/cash/all-record',(req, res) => {
-    res.send(require('./data/pay/payin.json'));
+    res.send(require('./data/pay/payout.json'));
 });
 //入金拒绝
 app.post('/api/cash/audit',(req, res) => {

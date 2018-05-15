@@ -109,8 +109,8 @@ const menuData = [
             {
                 key: 'transfer',
                 name: '转账审核',
-                path: '/pay/tranfer',
-                icon: 'plus',
+                path: '/pay/transfer',
+                icon: 'export',
                 role:["admin_tina"]
             }
         ]

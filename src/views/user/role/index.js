@@ -39,7 +39,7 @@ class RoleTable extends Component {
             pager.total = Number(res.data.result_count);
             this.setState({
                 pagination: {
-                    total : res.data.pagination.result_count,
+                    total : res.data.result_count,
                     ...pager
                 },
                 tableData : res.data.result
