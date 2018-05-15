@@ -54,7 +54,9 @@ app.post('/api/user/add',(req, res) => {
 app.post('/api/user/update',(req, res) => {
     res.send(require('./data/common/ok.json'));
 });
-
+app.post('/api/user/update-pwd',(req, res) => {
+    res.send(require('./data/common/ok.json'));
+});
 //注册审核
 app.post('/api/register/list',(req, res) => {
     res.send(require('./data/register/list.json'));
